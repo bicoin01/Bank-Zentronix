@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Zentronix Bank | Offshore Premium Banking</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Zentronix Bank | Offshore Premium Banking - Blue & Purple Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        :root {
+            --bg-deep: #0a0b1e;
+            --bg-surface: #0d1117;
+            --card-bg: rgba(26, 27, 58, 0.75);
+            --card-bg-solid: #1a1b3a;
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --neon-cyan: #00e5ff;
+            --neon-green: #00ff88;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0b0;
+            --border-glow: rgba(188, 19, 254, 0.3);
+            --military-purple: #2a1b4a;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,14 +30,18 @@
         }
 
         body {
-            font-family: 'Orbitron', monospace;
-            background: radial-gradient(circle at 20% 30%, #0a0a2a, #020218);
-            color: #e0e5ff;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0b1e 0%, #0d1117 50%, #0a0b1e 100%);
+            color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Animated Cyber Background */
+        body.rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
         .cyber-bg {
             position: fixed;
             top: 0;
@@ -29,7 +49,7 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(135deg, #0a0a2a 0%, #1a0a3a 50%, #0a0a2a 100%);
+            background: radial-gradient(ellipse at 20% 30%, #0a0b1e 0%, #050617 100%);
         }
 
         .cyber-bg::before {
@@ -42,15 +62,16 @@
             background: repeating-linear-gradient(
                 transparent 0px,
                 transparent 2px,
-                rgba(168, 85, 247, 0.08) 2px,
-                rgba(168, 85, 247, 0.08) 4px
+                rgba(188, 19, 254, 0.04) 2px,
+                rgba(188, 19, 254, 0.04) 4px
             );
             animation: scan 20s linear infinite;
         }
 
         @keyframes scan {
             0% { transform: translateY(0); }
-            100% { transform: translateY(50%); }
+            50% { transform: translateY(50%); }
+            100% { transform: translateY(0); }
         }
 
         .grid-overlay {
@@ -60,13 +81,12 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -1;
         }
 
-        /* Floating Particles */
         .particles {
             position: fixed;
             top: 0;
@@ -79,66 +99,68 @@
 
         .particle {
             position: absolute;
-            background: rgba(168, 85, 247, 0.4);
+            background: rgba(188, 19, 254, 0.3);
             border-radius: 50%;
             animation: floatParticle 15s infinite;
         }
 
         @keyframes floatParticle {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-            50% { transform: translateY(-80px) translateX(40px); opacity: 0.8; }
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+            50% { transform: translateY(-60px) translateX(30px); opacity: 0.5; }
         }
 
-        /* Language Selector - Premium */
         .lang-container {
             position: fixed;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
         }
 
+        body.rtl .lang-container {
+            right: auto;
+            left: 20px;
+        }
+
         .lang-trigger {
-            background: rgba(8, 12, 26, 0.95);
-            backdrop-filter: blur(15px);
-            border: 1px solid #a855f7;
-            border-radius: 3rem;
-            padding: 0.7rem 1.5rem;
+            background: rgba(26, 27, 58, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--neon-purple);
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             font-family: 'Orbitron', monospace;
-            font-weight: 600;
-            color: #e0e5ff;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--neon-blue);
             transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
         }
 
         .lang-trigger:hover {
-            border-color: #00f2ff;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .lang-trigger i {
-            color: #00f2ff;
-            font-size: 1.2rem;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
         }
 
         .lang-dropdown {
             position: absolute;
-            top: 60px;
+            top: 55px;
             right: 0;
-            background: rgba(8, 12, 26, 0.98);
+            background: rgba(26, 27, 58, 0.98);
             backdrop-filter: blur(20px);
-            border: 1px solid #a855f7;
-            border-radius: 1.2rem;
+            border: 1px solid var(--neon-purple);
+            border-radius: 1rem;
             padding: 0.5rem;
-            min-width: 170px;
+            min-width: 150px;
             display: none;
             flex-direction: column;
             gap: 0.3rem;
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
+        }
+
+        body.rtl .lang-dropdown {
+            right: auto;
+            left: 0;
         }
 
         .lang-container.active .lang-dropdown { display: flex; }
@@ -146,43 +168,41 @@
         .lang-option {
             background: transparent;
             border: none;
-            padding: 0.8rem 1rem;
-            border-radius: 0.8rem;
-            color: #e0e5ff;
+            padding: 0.6rem 1rem;
+            border-radius: 0.6rem;
+            color: var(--text-primary);
             font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             transition: all 0.2s;
         }
 
         .lang-option:hover {
-            background: rgba(168, 85, 247, 0.3);
-            transform: translateX(5px);
+            background: rgba(188, 19, 254, 0.2);
         }
 
         .lang-option.active {
-            background: linear-gradient(95deg, #a855f7, #3b82f6);
-            color: white;
+            background: linear-gradient(95deg, var(--neon-purple), var(--neon-blue));
+            color: #0a0b1e;
         }
 
-        /* Main Container */
         .main-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 1.5rem;
         }
 
-        /* Top Logo Area */
         .top-logo-area {
             text-align: center;
             margin-bottom: 1.5rem;
             padding: 1.5rem;
-            background: rgba(8, 12, 26, 0.4);
+            background: rgba(26, 27, 58, 0.5);
             backdrop-filter: blur(10px);
             border-radius: 2rem;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            border: 1px solid var(--border-glow);
         }
 
         .bank-logo {
@@ -197,32 +217,32 @@
         }
 
         .bank-logo i {
-            font-size: 4.5rem;
-            background: linear-gradient(135deg, #a855f7, #00f2ff);
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
         }
 
         .bank-title {
             font-size: 2.5rem;
-            background: linear-gradient(135deg, #a855f7, #00f2ff);
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             letter-spacing: 4px;
-            text-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+            font-family: 'Orbitron', monospace;
         }
 
         .bank-subtitle {
-            font-size: 0.8rem;
-            opacity: 0.8;
+            font-size: 0.75rem;
+            opacity: 0.7;
             margin-top: 0.5rem;
             letter-spacing: 2px;
+            font-family: 'Orbitron', monospace;
+            color: var(--neon-blue);
         }
 
-        /* Dashboard Nav */
         .dashboard-nav {
             display: flex;
             justify-content: center;
@@ -231,365 +251,986 @@
             flex-wrap: wrap;
         }
 
-        .dashboard-trigger {
-            background: linear-gradient(95deg, #a855f7, #3b82f6);
+        .dashboard-trigger, .submit-docs-trigger {
+            background: linear-gradient(95deg, var(--neon-purple), var(--neon-blue));
             border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 3rem;
-            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 2rem;
+            color: #0a0b1e;
             font-family: 'Orbitron', monospace;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .dashboard-trigger:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+        .dashboard-trigger:hover, .submit-docs-trigger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
         }
 
         .logout-trigger {
-            background: rgba(255, 68, 102, 0.2);
-            border: 1px solid #ff4466;
-            padding: 1rem 2.5rem;
-            border-radius: 3rem;
-            color: #ff4466;
+            background: rgba(188, 19, 254, 0.15);
+            border: 1px solid var(--neon-purple);
+            padding: 0.8rem 2rem;
+            border-radius: 2rem;
+            color: var(--neon-purple);
             font-family: 'Orbitron', monospace;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logout-trigger:hover {
-            background: #ff4466;
-            color: white;
-            box-shadow: 0 0 25px #ff4466;
+            background: var(--neon-purple);
+            color: #0a0b1e;
+            box-shadow: 0 0 20px var(--neon-purple);
         }
 
-        /* Hero Section - Enhanced */
-        .hero-section {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 242, 255, 0.1));
+        /* Seção Institucional */
+        .institutional-section {
+            background: rgba(26, 27, 58, 0.4);
             border-radius: 2rem;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid #a855f7;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent);
-            animation: rotateGlow 10s linear infinite;
-        }
-
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hero-description {
-            font-size: 1rem;
-            line-height: 1.8;
-            max-width: 850px;
-            margin: 0 auto;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* About Section - New */
-        .about-section {
-            background: rgba(8, 12, 26, 0.6);
-            border-radius: 1.5rem;
             padding: 2rem;
             margin-bottom: 2rem;
-            border: 1px solid #a855f7;
+            border: 1px solid var(--border-glow);
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .about-card {
-            background: rgba(1, 5, 24, 0.8);
-            border-radius: 1.2rem;
-            padding: 1.5rem;
+        .hero-institutional {
             text-align: center;
-            border: 1px solid #a855f7;
-            transition: all 0.3s;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
         }
 
-        .about-card:hover {
-            border-color: #00f2ff;
-            transform: translateY(-5px);
-        }
-
-        .about-card i {
-            font-size: 2.5rem;
-            color: #00f2ff;
-            margin-bottom: 1rem;
-        }
-
-        .about-card h4 {
-            color: #c084fc;
+        .hero-institutional h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Orbitron', monospace;
             margin-bottom: 0.5rem;
-            font-size: 1rem;
         }
 
-        .about-card p {
-            font-size: 0.75rem;
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 242, 255, 0.15);
+            border: 1px solid var(--neon-blue);
+            border-radius: 2rem;
+            padding: 0.3rem 1rem;
+            font-size: 0.7rem;
+            color: var(--neon-blue);
+            margin-top: 0.5rem;
+        }
+
+        .hero-description-institutional {
+            max-width: 900px;
+            margin: 1.5rem auto 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        .institutional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: rgba(26, 27, 58, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-glow);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
+        }
+
+        .icon-neon {
+            width: 50px;
+            height: 50px;
+            background: rgba(188, 19, 254, 0.15);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(0, 242, 255, 0); }
+        }
+
+        .icon-neon i {
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+        }
+
+        .info-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            color: var(--neon-purple);
+            margin-bottom: 0.8rem;
+        }
+
+        .info-card p {
+            font-size: 0.8rem;
             line-height: 1.5;
             opacity: 0.8;
         }
 
-        /* Currencies Section */
-        .currencies-section {
-            background: rgba(8, 12, 26, 0.6);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid #a855f7;
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
         }
 
-        .currencies-grid {
+        .feature-tag {
+            background: rgba(0, 242, 255, 0.1);
+            border-radius: 2rem;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-tag i {
+            font-size: 0.7rem;
+            color: var(--neon-green);
+        }
+
+        .sub-items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
 
-        .currency-accepted {
-            background: rgba(1, 5, 24, 0.8);
+        .sub-item {
+            background: rgba(26, 27, 58, 0.4);
             border-radius: 1rem;
-            padding: 1rem;
+            padding: 0.8rem;
             text-align: center;
-            border: 1px solid #a855f7;
             transition: all 0.3s;
         }
 
-        .currency-accepted:hover {
-            border-color: #00f2ff;
+        .sub-item:hover {
+            background: rgba(0, 242, 255, 0.1);
             transform: translateY(-3px);
         }
 
-        .currency-accepted i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #00f2ff;
+        .sub-item i {
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            margin-bottom: 0.3rem;
         }
 
-        .currency-accepted .currency-name {
-            font-size: 0.8rem;
-            font-weight: bold;
+        .sub-item span {
+            font-size: 0.65rem;
+            display: block;
         }
 
-        .currency-accepted .currency-code {
-            font-size: 0.6rem;
-            opacity: 0.7;
+        .impact-footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.08), rgba(188, 19, 254, 0.05));
+            border-radius: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid var(--border-glow);
         }
 
-        /* Crypto Section */
-        .crypto-section {
-            background: rgba(8, 12, 26, 0.6);
+        .impact-footer p {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .impact-footer small {
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        .about-section {
+            background: rgba(26, 27, 58, 0.5);
             border-radius: 1.5rem;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            border: 1px solid #a855f7;
+            border: 1px solid var(--border-glow);
         }
 
         .section-title {
-            color: #c084fc;
-            font-size: 1.3rem;
+            color: var(--neon-blue);
+            font-size: 1.2rem;
             margin-bottom: 1rem;
             text-align: center;
             letter-spacing: 2px;
+            font-family: 'Orbitron', monospace;
         }
 
-        .crypto-grid {
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
 
-        .crypto-item {
-            background: rgba(1, 5, 24, 0.8);
+        .about-card {
+            background: rgba(26, 27, 58, 0.8);
             border-radius: 1rem;
             padding: 1rem;
             text-align: center;
-            border: 1px solid #a855f7;
+            border: 1px solid var(--border-glow);
             transition: all 0.3s;
         }
 
-        .crypto-item:hover {
-            border-color: #00f2ff;
+        .about-card:hover {
+            border-color: var(--neon-blue);
             transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
         }
 
-        .crypto-icon {
-            font-size: 2rem;
+        .about-card i {
+            font-size: 1.8rem;
+            color: var(--neon-blue);
             margin-bottom: 0.5rem;
         }
 
-        .crypto-name {
-            font-size: 0.75rem;
-            font-weight: bold;
+        .about-card h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
         }
 
-        .crypto-price {
-            font-size: 0.6rem;
-            color: #00ff88;
-            margin-top: 0.3rem;
+        .about-card p {
+            font-size: 0.7rem;
+            opacity: 0.7;
         }
 
-        /* Stats */
+        .currencies-section, .crypto-section {
+            background: rgba(26, 27, 58, 0.5);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-glow);
+        }
+
+        .currencies-grid, .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .currency-accepted, .crypto-item {
+            background: rgba(26, 27, 58, 0.8);
+            border-radius: 1rem;
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid var(--border-glow);
+            transition: all 0.3s;
+        }
+
+        .currency-accepted:hover, .crypto-item:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-3px);
+        }
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
             margin-bottom: 2rem;
         }
 
         .stat-card {
-            background: rgba(8, 12, 26, 0.7);
+            background: rgba(26, 27, 58, 0.5);
             backdrop-filter: blur(10px);
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-            border: 1px solid #a855f7;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--border-glow);
             text-align: center;
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            border-color: #00f2ff;
-            transform: translateY(-3px);
         }
 
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #00f2ff;
-        }
-
-        .stat-title {
-            font-size: 0.7rem;
-            opacity: 0.7;
-            margin-top: 0.3rem;
-        }
-
-        /* Submit Section */
-        .submit-section {
-            background: rgba(8, 12, 26, 0.6);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid #a855f7;
-        }
-
-        .submit-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .cyber-input {
-            width: 100%;
-            padding: 0.9rem;
-            background: rgba(1, 5, 24, 0.9);
-            border: 1px solid #a855f7;
-            border-radius: 0.8rem;
-            color: #e0e5ff;
+            color: var(--neon-blue);
             font-family: 'Orbitron', monospace;
+        }
+
+        /* Submit Modal */
+        .submit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 11, 30, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 3500;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .submit-modal.active {
+            display: flex;
+        }
+
+        .submit-modal-content {
+            background: linear-gradient(135deg, #1a1b3a, #0a0b1e);
+            border: 2px solid var(--neon-blue);
+            border-radius: 2rem;
+            padding: 2rem;
+            max-width: 550px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .submit-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .submit-modal-header h2 {
+            font-family: 'Orbitron', monospace;
+            color: var(--neon-blue);
+            font-size: 1.3rem;
+        }
+
+        .close-submit-modal {
+            background: rgba(255, 68, 102, 0.2);
+            border: 1px solid #ff4466;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            color: #ff4466;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
             transition: all 0.3s;
         }
 
-        .cyber-input:focus {
-            border-color: #00f2ff;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        .close-submit-modal:hover {
+            background: #ff4466;
+            color: #0a0b1e;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(26, 27, 58, 0.9);
+            border: 1px solid var(--border-glow);
+            border-radius: 0.8rem;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--neon-blue);
             outline: none;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
         }
 
-        .file-input {
-            background: rgba(1, 5, 24, 0.9);
-            border: 1px solid #a855f7;
-            border-radius: 0.8rem;
-            padding: 0.9rem;
-            color: #e0e5ff;
-        }
-
-        .submit-btn {
-            background: linear-gradient(95deg, #a855f7, #3b82f6);
-            border: none;
-            padding: 0.9rem;
-            border-radius: 0.8rem;
-            color: white;
-            font-weight: bold;
+        .document-upload-area {
+            border: 2px dashed var(--neon-purple);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            margin-top: 0.5rem;
         }
 
-        .submit-btn:hover {
+        .document-upload-area:hover {
+            border-color: var(--neon-blue);
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        .document-upload-area i {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .document-list {
+            margin-top: 1rem;
+        }
+
+        .document-item {
+            background: rgba(26, 27, 58, 0.8);
+            border-radius: 0.6rem;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+        }
+
+        .remove-doc {
+            background: rgba(255, 68, 102, 0.2);
+            border: none;
+            border-radius: 0.4rem;
+            padding: 0.2rem 0.5rem;
+            color: #ff4466;
+            cursor: pointer;
+            font-size: 0.6rem;
+        }
+
+        .submit-docs-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(95deg, var(--neon-purple), var(--neon-blue));
+            border: none;
+            border-radius: 1rem;
+            color: #0a0b1e;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .submit-docs-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 20px #a855f7;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
         }
 
-        /* Dashboard */
+        .submit-success {
+            background: rgba(0, 255, 136, 0.15);
+            border: 1px solid var(--neon-green);
+            border-radius: 0.8rem;
+            padding: 0.8rem;
+            margin-top: 1rem;
+            text-align: center;
+            color: var(--neon-green);
+            font-size: 0.8rem;
+        }
+
+        /* DASHBOARD */
         .dashboard-container {
             display: none;
             margin-top: 2rem;
         }
 
-        .dashboard-grid {
+        .dashboard-three-columns {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: 280px 1fr 340px;
+            gap: 1.8rem;
+        }
+
+        /* Perfil Card */
+        .profile-card {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        }
+
+        .profile-avatar i {
+            font-size: 2.5rem;
+            color: #0a0b1e;
+        }
+
+        .profile-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--neon-blue);
+            cursor: pointer;
+        }
+
+        .profile-name:hover {
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .profile-role {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            cursor: pointer;
+        }
+
+        /* Modal de Perfil */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 11, 30, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 4000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-modal.active {
+            display: flex;
+        }
+
+        .profile-modal-content {
+            background: linear-gradient(135deg, #1a1b3a, #0a0b1e);
+            border: 2px solid var(--neon-blue);
+            border-radius: 2rem;
+            padding: 2rem;
+            width: 450px;
+            max-width: 90%;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .profile-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .profile-modal-header h2 {
+            font-family: 'Orbitron', monospace;
+            color: var(--neon-blue);
+            font-size: 1.3rem;
+        }
+
+        .close-profile-modal {
+            background: rgba(255, 68, 102, 0.2);
+            border: 1px solid #ff4466;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            color: #ff4466;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+        }
+
+        .close-profile-modal:hover {
+            background: #ff4466;
+            color: #0a0b1e;
+        }
+
+        .profile-field {
+            margin-bottom: 1.2rem;
+        }
+
+        .profile-field label {
+            display: block;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-field input, .profile-field select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(26, 27, 58, 0.9);
+            border: 1px solid var(--border-glow);
+            border-radius: 0.8rem;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .profile-field input:focus, .profile-field select:focus {
+            border-color: var(--neon-blue);
+            outline: none;
+        }
+
+        .save-profile-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(95deg, var(--neon-purple), var(--neon-blue));
+            border: none;
+            border-radius: 1rem;
+            color: #0a0b1e;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .save-profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        }
+
+        .tactical-menu {
+            background: rgba(26, 27, 58, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-glow);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .menu-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-category h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            color: var(--neon-purple);
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .menu-item {
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-item i {
+            width: 20px;
+            font-size: 0.9rem;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background: rgba(188, 19, 254, 0.15);
+            color: var(--neon-blue);
+            border-left: 2px solid var(--neon-blue);
+        }
+
+        body.rtl .menu-item:hover, body.rtl .menu-item.active {
+            border-left: none;
+            border-right: 2px solid var(--neon-blue);
+        }
+
+        .center-column {
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
         }
 
-        .cyber-card {
-            background: rgba(8, 12, 26, 0.7);
-            backdrop-filter: blur(10px);
+        .chart-card {
+            background: rgba(26, 27, 58, 0.6);
+            backdrop-filter: blur(12px);
             border-radius: 1.5rem;
+            border: 1px solid var(--border-glow);
             padding: 1.5rem;
-            border: 1px solid #a855f7;
         }
 
-        .cyber-card:hover {
-            border-color: #00f2ff;
-        }
-
-        .card-header {
+        .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .chart-header h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            color: var(--neon-blue);
+        }
+
+        canvas {
+            max-height: 200px;
+            width: 100%;
+        }
+
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .asset-card {
+            background: rgba(26, 27, 58, 0.7);
+            border: 1px solid var(--border-glow);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .asset-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
+            transition: left 0.5s;
+        }
+
+        .asset-card:hover::before {
+            left: 100%;
+        }
+
+        .asset-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 25px rgba(188, 19, 254, 0.15);
+        }
+
+        .card-header-invest {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .asset-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .asset-ticker {
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .risk-gauge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .risk-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #3a3a5a;
+        }
+
+        .risk-dot.active {
+            background: var(--neon-purple);
+        }
+
+        .asset-price {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--neon-blue);
+            margin: 0.5rem 0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .buy-btn, .sell-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 0.6rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .buy-btn {
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+        }
+
+        .buy-btn:hover {
+            background: var(--neon-blue);
+            color: #0a0b1e;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+        }
+
+        .sell-btn {
+            background: rgba(188, 19, 254, 0.1);
+            border: 1px solid var(--neon-purple);
+            color: var(--neon-purple);
+        }
+
+        .sell-btn:hover {
+            background: var(--neon-purple);
+            color: #0a0b1e;
+        }
+
+        /* Seção de Saldo Multi-Moedas */
+        .balance-section {
+            background: rgba(26, 27, 58, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-glow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .balance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .balance-header h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            color: var(--neon-blue);
+        }
+
+        .balance-total {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--neon-green);
         }
 
         .currency-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-template-columns: 1fr;
             gap: 0.8rem;
+        }
+
+        .currency-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 1rem;
+            padding: 0.8rem;
+            border: 1px solid var(--border-glow);
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .currency-item:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        .currency-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .currency-name {
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            font-size: 0.8rem;
+            min-width: 50px;
+        }
+
+        .currency-symbol {
+            font-size: 1rem;
+        }
+
+        .currency-balance {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--neon-blue);
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .currency-send-btn {
+            background: rgba(0, 255, 136, 0.15);
+            border: 1px solid var(--neon-green);
+            border-radius: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            color: var(--neon-green);
+        }
+
+        .currency-send-btn:hover {
+            background: var(--neon-green);
+            color: #0a0b1e;
         }
 
         .transaction-list {
@@ -601,11 +1242,241 @@
             display: flex;
             justify-content: space-between;
             padding: 0.5rem;
-            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+            border-bottom: 1px solid var(--border-glow);
             font-size: 0.7rem;
         }
 
-        /* Login Modal */
+        .transaction-item:hover {
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        .tx-positive {
+            color: var(--neon-green);
+        }
+
+        .tx-negative {
+            color: #ff4466;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .military-hub {
+            background: linear-gradient(135deg, #1a1b3a, #2a1b4a);
+            border-radius: 1.5rem;
+            border: 1px solid var(--neon-green);
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .military-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .military-header h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            color: var(--neon-green);
+        }
+
+        .stealth-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .stealth-toggle span {
+            font-size: 0.7rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .stealth-switch {
+            width: 40px;
+            height: 20px;
+            background: rgba(188, 19, 254, 0.3);
+            border-radius: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .stealth-switch.active {
+            background: var(--neon-green);
+        }
+
+        .stealth-switch::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+        }
+
+        .stealth-switch.active::before {
+            transform: translateX(20px);
+        }
+
+        .balance-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .balance-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .balance-card .balance-currency {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+        }
+
+        .balance-card .balance-amount {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+        }
+
+        .balance-amount.stealth {
+            filter: blur(5px);
+            cursor: pointer;
+        }
+
+        .balance-amount.stealth:hover {
+            filter: blur(0);
+        }
+
+        .security-seals-right {
+            background: rgba(26, 27, 58, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-glow);
+            padding: 1.2rem;
+        }
+
+        .security-seals-right h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .seals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+        }
+
+        .seal-item {
+            text-align: center;
+            cursor: pointer;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+        .seal-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        .seal-item i {
+            font-size: 1.5rem;
+        }
+
+        .seal-item span {
+            display: block;
+            font-size: 0.55rem;
+            font-family: 'Space Mono', monospace;
+            margin-top: 0.3rem;
+        }
+
+        .simulator-panel {
+            background: rgba(26, 27, 58, 0.6);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .simulator-slider {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .ghost-mode.active .balance-amount,
+        .ghost-mode.active .asset-price,
+        .ghost-mode.active .stat-value,
+        .ghost-mode.active .currency-balance {
+            filter: blur(5px);
+            cursor: pointer;
+        }
+
+        .ghost-mode.active .balance-amount:hover,
+        .ghost-mode.active .asset-price:hover,
+        .ghost-mode.active .stat-value:hover,
+        .ghost-mode.active .currency-balance:hover {
+            filter: blur(0);
+        }
+
+        .order-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 11, 30, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .order-content {
+            background: #1a1b3a;
+            border: 1px solid var(--neon-blue);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 450px;
+            max-width: 90%;
+        }
+
+        .transfer-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 11, 30, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 2002;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .transfer-modal .order-content {
+            width: 500px;
+            max-width: 95%;
+        }
+
         .login-modal {
             display: none;
             position: fixed;
@@ -613,92 +1484,371 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.97);
+            background: rgba(10, 11, 30, 0.98);
             backdrop-filter: blur(25px);
-            z-index: 2000;
+            z-index: 3000;
             justify-content: center;
             align-items: center;
         }
 
-        .login-container {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 242, 255, 0.1));
-            border: 2px solid #a855f7;
-            border-radius: 2rem;
-            padding: 2.5rem;
-            width: 400px;
-            text-align: center;
-            box-shadow: 0 0 70px rgba(168, 85, 247, 0.5);
-            animation: borderPulse 2s infinite;
+        .login-modal.active {
+            display: flex;
         }
 
-        @keyframes borderPulse {
-            0%, 100% { border-color: #a855f7; box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); }
-            50% { border-color: #00f2ff; box-shadow: 0 0 70px rgba(0, 242, 255, 0.6); }
+        .login-container {
+            background: linear-gradient(145deg, #1a1b3a, #0f1025);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            width: 420px;
+            max-width: 90%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: modalFadeIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.05), rgba(188, 19, 254, 0.05), transparent);
+            animation: modalScan 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes modalScan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .login-header {
+            margin-bottom: 2rem;
+        }
+
+        .login-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(0, 242, 255, 0); }
+        }
+
+        .login-icon i {
+            font-size: 2.5rem;
+            color: #0a0b1e;
         }
 
         .login-container h2 {
-            color: #00f2ff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+        }
+
+        .login-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        .input-group {
             margin-bottom: 1.5rem;
+            text-align: left;
         }
 
-        .login-error-msg {
-            color: #ff4466;
-            font-size: 0.75rem;
-            margin-top: 0.8rem;
+        body.rtl .input-group {
+            text-align: right;
         }
 
-        .close-modal-btn {
+        .input-label {
+            display: block;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            color: var(--neon-purple);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .input-label i {
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        body.rtl .input-label i {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+
+        .login-input {
             width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.8rem;
-            background: rgba(255, 68, 102, 0.2);
+            padding: 0.9rem 1rem;
+            background: rgba(10, 11, 30, 0.8);
+            border: 1px solid var(--border-glow);
+            border-radius: 1rem;
+            color: var(--text-primary);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            background: rgba(10, 11, 30, 1);
+        }
+
+        .login-input::placeholder {
+            color: rgba(160, 160, 176, 0.5);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+        }
+
+        .login-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .login-btn {
+            flex: 1;
+            padding: 0.9rem;
+            background: linear-gradient(95deg, var(--neon-purple), var(--neon-blue));
+            border: none;
+            border-radius: 1rem;
+            color: #0a0b1e;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
+        }
+
+        .close-login-btn {
+            flex: 1;
+            padding: 0.9rem;
+            background: rgba(255, 68, 102, 0.15);
             border: 1px solid #ff4466;
             border-radius: 1rem;
             color: #ff4466;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
-        /* Footer */
-        .footer {
-            margin-top: 3rem;
-            padding: 2rem;
+        .close-login-btn:hover {
+            background: #ff4466;
+            color: #0a0b1e;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px #ff4466;
+        }
+
+        .login-error {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(255, 68, 102, 0.1);
+            border: 1px solid #ff4466;
+            border-radius: 0.8rem;
+            color: #ff4466;
+            font-size: 0.7rem;
+            font-family: 'Space Mono', monospace;
             text-align: center;
-            border-top: 1px solid #a855f7;
-            background: rgba(8, 12, 26, 0.4);
+        }
+
+        .demo-credentials {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-glow);
+            font-size: 0.65rem;
+            font-family: 'Space Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .demo-credentials span {
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(26, 27, 58, 0.9), rgba(42, 27, 74, 0.9));
             border-radius: 1rem;
+            border-top: 1px solid var(--border-glow);
         }
 
         .payment-icons {
             display: flex;
             justify-content: center;
-            gap: 2.5rem;
-            margin-bottom: 1rem;
+            align-items: center;
+            gap: 1.8rem;
+            margin-bottom: 1.2rem;
             flex-wrap: wrap;
         }
 
-        .payment-icons i {
-            font-size: 2.8rem;
-            color: #c084fc;
+        .payment-icons i, .security-icons i {
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            opacity: 0.7;
             transition: all 0.3s;
+            filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.3));
         }
 
-        .payment-icons i:hover {
-            color: #00f2ff;
-            transform: translateY(-3px);
+        .payment-icons i:hover, .security-icons i:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 10px var(--neon-blue));
         }
 
-        .copyright {
-            font-size: 0.7rem;
+        .security-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(188, 19, 254, 0.2);
+        }
+
+        .security-icons .seal-cert {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            filter: grayscale(100%);
             opacity: 0.6;
         }
 
+        .security-icons .seal-cert:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .security-icons .seal-cert i {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .security-icons .seal-cert span {
+            font-size: 0.55rem;
+            font-family: 'Space Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .regulatory-text {
+            font-size: 0.6rem;
+            opacity: 0.6;
+            font-family: 'Space Mono', monospace;
+            margin: 0.8rem 0;
+            padding: 0.5rem;
+            border-top: 1px solid rgba(0, 242, 255, 0.15);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.15);
+        }
+
+        .copyright {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-family: 'Space Mono', monospace;
+            margin-top: 0.8rem;
+        }
+
+        .investment-section {
+            display: block;
+        }
+
+        @media (max-width: 1100px) {
+            .dashboard-three-columns {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .tactical-menu {
+                position: relative;
+                order: 1;
+            }
+            .center-column {
+                order: 2;
+            }
+            .right-column {
+                order: 3;
+            }
+            .institutional-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .bank-title { font-size: 1.8rem; }
-            .hero-description { font-size: 0.85rem; }
-            .currencies-grid, .crypto-grid { grid-template-columns: repeat(2, 1fr); }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .about-grid { grid-template-columns: 1fr; }
+            .asset-grid {
+                grid-template-columns: 1fr;
+            }
+            .seals-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .payment-icons, .security-icons {
+                gap: 1rem;
+            }
+            .hero-institutional h1 {
+                font-size: 1.3rem;
+            }
+            .login-container {
+                padding: 1.8rem;
+                width: 95%;
+            }
+            .login-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .currency-item {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            .currency-info {
+                justify-content: center;
+            }
+            .currency-balance {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -708,11 +1858,10 @@
 <div class="grid-overlay"></div>
 <div class="particles" id="particles"></div>
 
-<!-- Language Selector -->
 <div class="lang-container" id="langContainer">
     <div class="lang-trigger" id="langTrigger">
         <i class="fas fa-globe"></i>
-        <span id="currentLangText">ENGLISH</span>
+        <span id="currentLangText">EN</span>
         <i class="fas fa-chevron-down"></i>
     </div>
     <div class="lang-dropdown">
@@ -723,408 +1872,1545 @@
     </div>
 </div>
 
-<!-- Login Modal -->
+<!-- LOGIN MODAL -->
 <div id="loginModal" class="login-modal">
     <div class="login-container">
-        <div class="bank-logo" style="margin-bottom: 1rem;"><i class="fas fa-microchip"></i></div>
-        <h2 id="modalTitle">🔐 ACCESS YOUR ACCOUNT</h2>
-        <input type="text" id="loginId" class="cyber-input" placeholder="User ID" style="margin-bottom: 0.8rem;">
-        <input type="password" id="loginPassword" class="cyber-input" placeholder="Password">
-        <button id="loginSubmitBtn" class="submit-btn" style="margin-top: 1rem;">LOGIN TO DASHBOARD</button>
-        <button id="closeModalBtn" class="close-modal-btn">CLOSE</button>
-        <div id="loginErrorMsg" class="login-error-msg"></div>
-        <div style="margin-top: 0.8rem; font-size: 0.6rem; opacity: 0.5;">Demo Credentials: ID: admin | Password: zentronix</div>
+        <div class="login-header">
+            <div class="login-icon">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <h2 id="modalTitle">ACCESS INVESTMENT HUB</h2>
+            <div class="login-subtitle" id="modalSubtitle">SECURE • PRIVATE • QUANTUM</div>
+        </div>
+        
+        <div class="input-group">
+            <div class="input-label"><i class="fas fa-user"></i> <span id="userIdLabel">User ID</span></div>
+            <input type="text" id="loginId" class="login-input" placeholder="Enter your user ID" autocomplete="off">
+        </div>
+        
+        <div class="input-group">
+            <div class="input-label"><i class="fas fa-lock"></i> <span id="passwordLabel">Password</span></div>
+            <input type="password" id="loginPassword" class="login-input" placeholder="Enter your password">
+        </div>
+        
+        <div class="login-actions">
+            <button id="loginSubmitBtn" class="login-btn"><i class="fas fa-sign-in-alt"></i> <span id="loginBtnText">LOGIN</span></button>
+            <button id="closeModalBtn" class="close-login-btn"><i class="fas fa-times"></i> <span id="closeBtnText">CLOSE</span></button>
+        </div>
+        
+        <div id="loginErrorMsg" class="login-error" style="display: none;"></div>
+        
+        <div class="demo-credentials">
+            <i class="fas fa-flask"></i> <span id="demoText">DEMO CREDENTIALS</span><br>
+            <span id="demoId">ID: admin</span> | <span id="demoPass">Password: zentronix</span>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DE PERFIL -->
+<div id="profileModal" class="profile-modal">
+    <div class="profile-modal-content">
+        <div class="profile-modal-header">
+            <h2><i class="fas fa-user-edit"></i> <span id="profileTitle">EDIT PROFILE</span></h2>
+            <button class="close-profile-modal" id="closeProfileModalBtn">✕ CLOSE</button>
+        </div>
+        
+        <div class="profile-field">
+            <label><i class="fas fa-user"></i> <span id="fullNameLabel">Full Name</span></label>
+            <input type="text" id="profileFullName" class="form-input" placeholder="Enter your full name">
+        </div>
+        
+        <div class="profile-field">
+            <label><i class="fas fa-envelope"></i> <span id="emailLabelProfile">Email Address</span></label>
+            <input type="email" id="profileEmail" class="form-input" placeholder="Enter your email">
+        </div>
+        
+        <div class="profile-field">
+            <label><i class="fas fa-bullseye"></i> <span id="objectiveLabel">Investment Objective</span></label>
+            <select id="profileObjective" class="form-input">
+                <option value="conservative">Conservative - Capital Preservation</option>
+                <option value="moderate" selected>Moderate - Balanced Growth</option>
+                <option value="aggressive">Aggressive - Maximum Growth</option>
+                <option value="offshore">Offshore - Tax Optimization</option>
+            </select>
+        </div>
+        
+        <button id="saveProfileBtn" class="save-profile-btn"><i class="fas fa-save"></i> <span id="saveProfileText">SAVE CHANGES</span></button>
+    </div>
+</div>
+
+<!-- MODAL DE TRANSFERÊNCIA (ENVIAR) -->
+<div id="transferModal" class="transfer-modal">
+    <div class="order-content">
+        <h3 style="color:var(--neon-green);" id="transferTitle"><i class="fas fa-paper-plane"></i> SEND MONEY</h3>
+        <div id="transferInfo"></div>
+        <div style="margin:1rem 0;">
+            <input type="number" id="transferAmount" class="cyber-input" placeholder="Amount" step="0.01" style="margin-bottom:0.8rem;">
+            <input type="text" id="recipientName" class="cyber-input" placeholder="Recipient Full Name" style="margin-bottom:0.8rem;">
+            <input type="text" id="swiftCode" class="cyber-input" placeholder="SWIFT / BIC Code" style="margin-bottom:0.8rem;">
+            <input type="text" id="accountNumber" class="cyber-input" placeholder="Account Number / IBAN" style="margin-bottom:0.8rem;">
+            <input type="text" id="bankName" class="cyber-input" placeholder="Bank Name" style="margin-bottom:0.8rem;">
+            <textarea id="transferMessage" class="cyber-input" placeholder="Message (optional)" rows="2"></textarea>
+        </div>
+        <button id="confirmTransferBtn" class="submit-btn" style="width:100%; background:linear-gradient(95deg, var(--neon-green), #00cc66);">SEND TRANSFER</button>
+        <button class="close-transfer" style="margin-top:0.5rem; background:var(--neon-purple); border:none; padding:0.5rem; border-radius:0.5rem; width:100%; color:#0a0b1e; cursor:pointer;">CANCEL</button>
+    </div>
+</div>
+
+<div id="submitModal" class="submit-modal">
+    <div class="submit-modal-content">
+        <div class="submit-modal-header">
+            <h2 id="submitModalTitle"><i class="fas fa-file-alt"></i> SUBMIT VERIFICATION DOCUMENTS</h2>
+            <button class="close-submit-modal" id="closeSubmitModalBtn">✕ CLOSE</button>
+        </div>
+        
+        <form id="documentUploadForm">
+            <div class="form-group">
+                <label id="fullNameLabelDoc"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="fullNameDoc" class="form-input" placeholder="John Smith" required>
+            </div>
+            
+            <div class="form-group">
+                <label id="emailLabelDoc"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="emailDocInput" class="form-input" placeholder="email@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label id="phoneLabelDoc"><i class="fas fa-phone"></i> Phone Number</label>
+                <input type="tel" id="phoneDoc" class="form-input" placeholder="+55 11 99999-9999" required>
+            </div>
+            
+            <div class="form-group">
+                <label id="docTypeLabelDoc"><i class="fas fa-id-card"></i> Document Type</label>
+                <select id="docType" class="form-input">
+                    <option value="passport" id="passportOption">Passport</option>
+                    <option value="id" id="idOption">Identity Card</option>
+                    <option value="driver" id="driverOption">Driver's License</option>
+                    <option value="national" id="nationalOption">National ID</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label id="uploadLabelDoc"><i class="fas fa-upload"></i> Upload Documents</label>
+                <div class="document-upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p id="uploadText">Click or drag files here<br>PDF, JPG, PNG up to 10MB</p>
+                </div>
+                <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                <div id="fileList" class="document-list"></div>
+            </div>
+            
+            <div class="form-group">
+                <label id="notesLabelDoc"><i class="fas fa-sticky-note"></i> Notes (optional)</label>
+                <textarea rows="3" id="docNotes" class="form-input" placeholder="Additional information..."></textarea>
+            </div>
+            
+            <button type="button" id="submitDocsFinalBtn" class="submit-docs-btn">
+                <i class="fas fa-paper-plane"></i> <span id="submitDocsBtnText">SUBMIT DOCUMENTS</span>
+            </button>
+        </form>
+        
+        <div id="submitSuccessMsg" style="display: none;" class="submit-success">
+            <i class="fas fa-check-circle"></i> <span id="successMsg">Documents submitted successfully! Our team will review within 24 hours.</span>
+        </div>
     </div>
 </div>
 
 <div class="main-container">
-    <!-- Top Logo Area -->
     <div class="top-logo-area">
-        <div class="bank-logo">
-            <i class="fas fa-landmark"></i>
-        </div>
+        <div class="bank-logo"><i class="fas fa-microchip"></i></div>
         <h1 class="bank-title" id="bankTitle">ZENTRONIX BANK</h1>
-        <div class="bank-subtitle" id="bankSubtitle">Offshore Private Banking · Quantum Secure · Global Wealth Management</div>
+        <div class="bank-subtitle" id="bankSubtitle">Offshore Private Banking · Blue & Purple Edition</div>
     </div>
 
-    <!-- Dashboard Navigation -->
     <div class="dashboard-nav">
-        <button id="openLoginBtn" class="dashboard-trigger"><i class="fas fa-sign-in-alt"></i> <span id="accessBtnText">ACCESS DASHBOARD</span></button>
+        <button id="openLoginBtn" class="dashboard-trigger"><i class="fas fa-sign-in-alt"></i> <span id="accessBtnText">ACCESS INVESTMENT HUB</span></button>
+        <button id="openSubmitModalBtn" class="submit-docs-trigger"><i class="fas fa-file-upload"></i> <span id="submitDocsNavText">SUBMIT DOCUMENTS</span></button>
         <button id="logoutMainBtn" class="logout-trigger" style="display:none;"><i class="fas fa-sign-out-alt"></i> <span id="logoutBtnText">LOGOUT</span></button>
     </div>
 
-    <!-- Hero Section -->
-    <div class="hero-section">
-        <p class="hero-description" id="heroDesc">
-            Zentronix Bank is a premier offshore financial institution offering cutting-edge banking solutions, 
-            asset protection, and global wealth management. With our advanced quantum-secure platform, 
-            we provide unparalleled security for your digital and traditional assets. Founded in 2018, 
-            Zentronix has become a trusted name in offshore banking, serving clients across 156 countries 
-            with innovative financial products and personalized service.
-        </p>
+    <!-- SEÇÃO INSTITUCIONAL -->
+    <div class="institutional-section">
+        <div class="hero-institutional">
+            <div class="icon-neon" style="margin: 0 auto 1rem auto; width: 60px; height: 60px;">
+                <i class="fas fa-shield-alt" style="font-size: 2rem;"></i>
+            </div>
+            <h1 id="instHeroTitle">Zentronix Offshore Bank: Soberania, Tecnologia e Elite Financeira</h1>
+            <div class="hero-badge" id="instBadge">🏆 Liderando a Revolução Offshore desde 2017</div>
+            <p class="hero-description-institutional" id="instDesc">
+                Fundado em 2017, o Zentronix Bank não é apenas uma instituição financeira; é uma fortaleza para o capital global. 
+                Com sede em jurisdições de estabilidade geopolítica inquestionável, operamos como um facilitador de riqueza em 
+                um cenário de paraíso fiscal, oferecendo isenção tributária estratégica e proteção jurídica contra instabilidades 
+                econômicas locais.
+            </p>
+        </div>
+
+        <div class="institutional-grid">
+            <div class="info-card">
+                <div class="icon-neon"><i class="fas fa-globe"></i></div>
+                <h3 id="convTitle">🌍 Convergência Total: Fiduciário e Cripto</h3>
+                <p id="convDesc">Diferente dos bancos tradicionais, o Zentronix foi projetado para a era digital. Oferecemos uma ponte sem fricção entre o sistema bancário clássico e a economia descentralizada.</p>
+                <div class="sub-items-grid">
+                    <div class="sub-item"><i class="fas fa-dollar-sign"></i><span id="currenciesList">USD • EUR • CHF • GBP • JPY</span></div>
+                    <div class="sub-item"><i class="fab fa-bitcoin"></i><span id="cryptoList">BTC • BICOIN • ETH • BNB • SOL</span></div>
+                    <div class="sub-item"><i class="fas fa-bolt"></i><span id="liquidityText">Liquidez Instantânea</span></div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-neon"><i class="fas fa-chart-line"></i></div>
+                <h3 id="portfolioTitle">📈 Portfólio de Investimentos de Nova Geração</h3>
+                <p id="portfolioDesc">Nossa prateleira de produtos financeiros é a mais completa do setor offshore, organizada para entregar rendimentos superiores com gestão de risco inteligente.</p>
+                <div class="features-list">
+                    <span class="feature-tag" id="fixedIncomeTag"><i class="fas fa-chart-pie"></i> Renda Fixa Global</span>
+                    <span class="feature-tag" id="wealthTag"><i class="fas fa-brain"></i> Wealth Management & IA</span>
+                    <span class="feature-tag" id="peTag"><i class="fas fa-rocket"></i> Private Equity</span>
+                    <span class="feature-tag" id="militaryTag"><i class="fas fa-shield-virus"></i> Setor Militar</span>
+                    <span class="feature-tag" id="commoditiesTag"><i class="fas fa-gem"></i> Commodities</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-neon"><i class="fas fa-microchip"></i></div>
+                <h3 id="techTitle">🔐 Tecnologia, Privacidade e Sucessão</h3>
+                <p id="techDesc">O Zentronix Bank vai além das transações simples; nós cuidamos do seu legado.</p>
+                <div class="sub-items-grid">
+                    <div class="sub-item"><i class="fas fa-file-signature"></i><span id="successionText">Planejamento Sucessório</span></div>
+                    <div class="sub-item"><i class="fas fa-quantum"></i><span id="quantumText">Segurança Quântica</span></div>
+                    <div class="sub-item"><i class="fas fa-tachometer-alt"></i><span id="interfaceText">Interface Futurista</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="institutional-grid" style="margin-bottom: 1rem;">
+            <div class="info-card">
+                <div class="icon-neon"><i class="fas fa-headset"></i></div>
+                <h3 id="supportTitle">🎧 Suporte Elite 24/7</h3>
+                <p id="supportDesc">Atendimento personalizado por gestores de conta dedicados, disponíveis via chat criptografado em qualquer fuso horário.</p>
+            </div>
+            <div class="info-card">
+                <div class="icon-neon"><i class="fas fa-language"></i></div>
+                <h3 id="accessTitle">🌐 Acessibilidade Global</h3>
+                <p id="accessDesc">Plataforma totalmente adaptada para Inglês, Português, Espanhol e Árabe, garantindo que você gerencie seu banco no seu idioma de preferência.</p>
+                <div class="features-list">
+                    <span class="feature-tag">🇬🇧 EN</span>
+                    <span class="feature-tag">🇧🇷 PT</span>
+                    <span class="feature-tag">🇪🇸 ES</span>
+                    <span class="feature-tag">🇸🇦 AR</span>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="icon-neon"><i class="fas fa-credit-card"></i></div>
+                <h3 id="cardTitle">💳 Cartão Zentronix Black</h3>
+                <p id="cardDesc">Cartão de débito/crédito internacional sem limites de fronteiras, aceito em milhões de estabelecimentos e integrado diretamente à sua carteira cripto e fiduciária.</p>
+            </div>
+        </div>
+
+        <div class="impact-footer">
+            <p id="impactText">✨ Zentronix Offshore Bank: A evolução do seu poder financeiro começa aqui. ✨</p>
+            <small id="foundedText">Fundado em 2017. Conectado ao Futuro.</small>
+        </div>
     </div>
 
-    <!-- About Section - New Detailed -->
     <div class="about-section">
         <h2 class="section-title" id="aboutTitle">🌟 ABOUT ZENTRONIX BANK</h2>
         <div class="about-grid">
-            <div class="about-card">
-                <i class="fas fa-history"></i>
-                <h4>Our History</h4>
-                <p>Founded in 2018, Zentronix Bank has rapidly grown into a leading offshore financial institution, combining traditional banking values with cutting-edge technology to serve a global clientele.</p>
-            </div>
-            <div class="about-card">
-                <i class="fas fa-shield-alt"></i>
-                <h4>Security First</h4>
-                <p>Military-grade encryption, quantum-resistant security protocols, and multi-factor authentication ensure your assets are protected 24/7 against cyber threats.</p>
-            </div>
-            <div class="about-card">
-                <i class="fas fa-globe-americas"></i>
-                <h4>Global Reach</h4>
-                <p>With offices in Switzerland, Singapore, Dubai, and Cayman Islands, we provide seamless banking services across multiple jurisdictions and time zones.</p>
-            </div>
-            <div class="about-card">
-                <i class="fas fa-chart-line"></i>
-                <h4>Premium Returns</h4>
-                <p>Access exclusive investment opportunities with competitive returns, including our signature Quantum Growth Portfolio with up to 12% annual yield.</p>
-            </div>
+            <div class="about-card"><i class="fas fa-history"></i><h4 id="historyTitle">Our History</h4><p id="historyDesc">Founded in 2018, serving 156+ countries</p></div>
+            <div class="about-card"><i class="fas fa-shield-alt"></i><h4 id="securityTitle">Security First</h4><p id="securityDesc">Quantum-resistant protocols</p></div>
+            <div class="about-card"><i class="fas fa-globe-americas"></i><h4 id="globalTitle">Global Reach</h4><p id="globalDesc">Offices in Switzerland, Singapore, Dubai</p></div>
+            <div class="about-card"><i class="fas fa-chart-line"></i><h4 id="returnsTitle">Premium Returns</h4><p id="returnsDesc">Up to 12% annual yield</p></div>
         </div>
     </div>
 
-    <!-- Currencies Accepted Section -->
     <div class="currencies-section">
         <h2 class="section-title" id="currenciesTitle">💱 CURRENCIES WE ACCEPT</h2>
         <div class="currencies-grid">
-            <div class="currency-accepted"><i class="fas fa-dollar-sign"></i><div class="currency-name">US Dollar</div><div class="currency-code">USD</div></div>
-            <div class="currency-accepted"><i class="fas fa-euro-sign"></i><div class="currency-name">Euro</div><div class="currency-code">EUR</div></div>
-            <div class="currency-accepted"><i class="fas fa-pound-sign"></i><div class="currency-name">British Pound</div><div class="currency-code">GBP</div></div>
-            <div class="currency-accepted"><i class="fas fa-dollar-sign"></i><div class="currency-name">Canadian Dollar</div><div class="currency-code">CAD</div></div>
-            <div class="currency-accepted"><i class="fas fa-real"></i><div class="currency-name">Brazilian Real</div><div class="currency-code">BRL</div></div>
-            <div class="currency-accepted"><i class="fas fa-dirham"></i><div class="currency-name">UAE Dirham</div><div class="currency-code">AED</div></div>
-            <div class="currency-accepted"><i class="fas fa-franc-sign"></i><div class="currency-name">Swiss Franc</div><div class="currency-code">CHF</div></div>
-            <div class="currency-accepted"><i class="fas fa-yen-sign"></i><div class="currency-name">Japanese Yen</div><div class="currency-code">JPY</div></div>
+            <div class="currency-accepted"><i class="fas fa-dollar-sign"></i><div>USD</div></div>
+            <div class="currency-accepted"><i class="fas fa-euro-sign"></i><div>EUR</div></div>
+            <div class="currency-accepted"><i class="fas fa-pound-sign"></i><div>GBP</div></div>
+            <div class="currency-accepted"><i class="fas fa-dollar-sign"></i><div>CAD</div></div>
+            <div class="currency-accepted"><i class="fas fa-real"></i><div>BRL</div></div>
+            <div class="currency-accepted"><i class="fas fa-dirham"></i><div>AED</div></div>
+            <div class="currency-accepted"><i class="fas fa-franc-sign"></i><div>CHF</div></div>
+            <div class="currency-accepted"><i class="fas fa-yen-sign"></i><div>JPY</div></div>
         </div>
     </div>
 
-    <!-- Crypto Section -->
     <div class="crypto-section">
         <h2 class="section-title" id="cryptoTitle">💎 SUPPORTED CRYPTOCURRENCIES</h2>
         <div class="crypto-grid">
-            <div class="crypto-item"><div class="crypto-icon">₿</div><div class="crypto-name">Bitcoin</div><div class="crypto-price" id="btcPrice">BTC/USD: $67,234</div></div>
-            <div class="crypto-item"><div class="crypto-icon">Ξ</div><div class="crypto-name">Ethereum</div><div class="crypto-price" id="ethPrice">ETH/USD: $3,456</div></div>
-            <div class="crypto-item"><div class="crypto-icon">🪙</div><div class="crypto-name">BradiCoin</div><div class="crypto-price" id="brdPrice">BRD/USD: $10.00</div></div>
-            <div class="crypto-item"><div class="crypto-icon">◎</div><div class="crypto-name">Solana</div><div class="crypto-price" id="solPrice">SOL/USD: $98.50</div></div>
-            <div class="crypto-item"><div class="crypto-icon">✕</div><div class="crypto-name">Ripple</div><div class="crypto-price" id="xrpPrice">XRP/USD: $0.52</div></div>
-            <div class="crypto-item"><div class="crypto-icon">⚡</div><div class="crypto-name">Cardano</div><div class="crypto-price" id="adaPrice">ADA/USD: $0.45</div></div>
+            <div class="crypto-item"><div>₿</div><div>Bitcoin</div><div id="btcPrice">$67,234</div></div>
+            <div class="crypto-item"><div>Ξ</div><div>Ethereum</div><div id="ethPrice">$3,456</div></div>
+            <div class="crypto-item"><div>🪙</div><div>BradiCoin</div><div id="brdPrice">$10.00</div></div>
+            <div class="crypto-item"><div>◎</div><div>Solana</div><div id="solPrice">$98.50</div></div>
         </div>
     </div>
 
-    <!-- Stats Section -->
     <div class="stats-grid">
-        <div class="stat-card"><div class="stat-value" id="totalAssets">$2.8B</div><div class="stat-title" id="assetsTitle">Total Assets Under Management</div></div>
-        <div class="stat-card"><div class="stat-value" id="activeClients">12,847</div><div class="stat-title" id="clientsTitle">Active Global Clients</div></div>
-        <div class="stat-card"><div class="stat-value" id="countries">156+</div><div class="stat-title" id="countriesTitle">Countries Served Worldwide</div></div>
-        <div class="stat-card"><div class="stat-value" id="securityLevel">Quantum 256-bit</div><div class="stat-title" id="securityTitle">Security Encryption Standard</div></div>
+        <div class="stat-card"><div class="stat-value">$2.8B</div><div id="aumText">AUM</div></div>
+        <div class="stat-card"><div class="stat-value">12,847</div><div id="clientsText">Clients</div></div>
+        <div class="stat-card"><div class="stat-value">156+</div><div id="countriesText">Countries</div></div>
+        <div class="stat-card"><div class="stat-value">Quantum</div><div id="encryptionText">Encryption</div></div>
     </div>
 
-    <!-- Submit Documents Section -->
-    <div class="submit-section">
-        <h2 class="section-title" id="submitTitle">📄 SUBMIT VERIFICATION DOCUMENTS</h2>
-        <form id="documentsForm" class="submit-form">
-            <input type="text" id="fullName" class="cyber-input" placeholder="Full Legal Name" required>
-            <input type="email" id="emailDoc" class="cyber-input" placeholder="Email Address" required>
-            <input type="text" id="passportNumber" class="cyber-input" placeholder="Passport / National ID Number" required>
-            <input type="file" id="documentFile" class="file-input" accept=".pdf,.jpg,.png" required>
-            <button type="submit" class="submit-btn" id="submitDocsBtn">SUBMIT DOCUMENTS FOR VERIFICATION</button>
-        </form>
-        <div id="submitMessage" style="margin-top: 1rem; text-align: center; font-size: 0.75rem;"></div>
-    </div>
-
-    <!-- Dashboard -->
+    <!-- DASHBOARD -->
     <div id="dashboardContainer" class="dashboard-container">
-        <h2 class="section-title" id="dashboardTitle">💳 YOUR DASHBOARD</h2>
-        <div class="dashboard-grid">
-            <div class="cyber-card">
-                <div class="card-header"><h3>🌍 MULTI-CURRENCY ACCOUNTS</h3><i class="fas fa-exchange-alt" style="color: #00f2ff;"></i></div>
-                <div class="currency-grid">
-                    <div class="currency-item"><div class="crypto-icon">💵</div><div class="crypto-name">USD</div><div class="crypto-price" id="usdBalance">$25,000</div></div>
-                    <div class="currency-item"><div class="crypto-icon">💶</div><div class="crypto-name">EUR</div><div class="crypto-price" id="eurBalance">€18,000</div></div>
-                    <div class="currency-item"><div class="crypto-icon">💷</div><div class="crypto-name">GBP</div><div class="crypto-price" id="gbpBalance">£15,000</div></div>
-                    <div class="currency-item"><div class="crypto-icon">🇨🇦</div><div class="crypto-name">CAD</div><div class="crypto-price" id="cadBalance">C$22,000</div></div>
-                    <div class="currency-item"><div class="crypto-icon">🇧🇷</div><div class="crypto-name">BRL</div><div class="crypto-price" id="brlBalance">R$50,000</div></div>
-                    <div class="currency-item"><div class="crypto-icon">🇦🇪</div><div class="crypto-name">AED</div><div class="crypto-price" id="aedBalance">د.إ70,000</div></div>
+        <div class="dashboard-three-columns">
+            <!-- Menu Esquerdo -->
+            <div class="tactical-menu">
+                <div class="profile-card" id="openProfileBtn">
+                    <div class="profile-avatar"><i class="fas fa-user-astronaut"></i></div>
+                    <div class="profile-name" id="welcomeUser">Alexander Vance</div>
+                    <div class="profile-role" id="userRole">Private Banking Elite</div>
+                </div>
+                <div class="menu-category">
+                    <h4>⛓️ CRYPTO & DEFI</h4>
+                    <div class="menu-item active" data-section="crypto"><i class="fas fa-coins"></i> <span id="stakingMenu">Staking Center</span></div>
+                    <div class="menu-item" data-section="rwa"><i class="fas fa-cube"></i> <span id="rwaMenu">RWA & NFTs</span></div>
+                </div>
+                <div class="menu-category">
+                    <h4>🏛️ GLOBAL FIXED INCOME</h4>
+                    <div class="menu-item" data-section="treasuries"><i class="fas fa-landmark"></i> <span id="treasuriesMenu">Treasuries & Bonds</span></div>
+                    <div class="menu-item" data-section="cds"><i class="fas fa-clock"></i> <span id="cdsMenu">CDs / Time Deposits</span></div>
+                </div>
+                <div class="menu-category">
+                    <h4>📈 EQUITY MARKETS</h4>
+                    <div class="menu-item" data-section="stocks"><i class="fas fa-chart-line"></i> <span id="stocksMenu">Nasdaq/NYSE</span></div>
+                    <div class="menu-item" data-section="reits"><i class="fas fa-building"></i> <span id="reitsMenu">REITs Center</span></div>
+                </div>
+                <div class="menu-category">
+                    <h4>⚙️ SYSTEM CONTROLS</h4>
+                    <div class="menu-item" id="ghostModeBtn"><i class="fas fa-user-secret"></i> <span id="ghostMenu">Ghost Mode</span></div>
+                    <div class="menu-item" id="simulatorBtn"><i class="fas fa-chart-simple"></i> <span id="simulatorMenu">Scenario Simulator</span></div>
+                    <div class="menu-item" id="themesBtn"><i class="fas fa-palette"></i> <span id="themesMenu">Theme Weaver</span></div>
+                    <div class="menu-item" id="auditBtn"><i class="fas fa-history"></i> <span id="auditMenu">Audit Logs</span></div>
                 </div>
             </div>
-            <div class="cyber-card">
-                <div class="card-header"><h3>💰 DEPOSIT FUNDS</h3><i class="fas fa-arrow-down" style="color: #00ff88;"></i></div>
-                <input type="number" id="depositAmount" class="cyber-input" placeholder="Enter amount">
-                <select id="depositCurrency" class="cyber-input">
-                    <option value="USD">US Dollar (USD)</option><option value="EUR">Euro (EUR)</option>
-                    <option value="GBP">British Pound (GBP)</option><option value="CAD">Canadian Dollar (CAD)</option>
-                    <option value="BRL">Brazilian Real (BRL)</option><option value="AED">UAE Dirham (AED)</option>
-                </select>
-                <button id="depositBtn" class="submit-btn">DEPOSIT FUNDS</button>
-                <div id="depositMsg" style="margin-top: 0.5rem; font-size: 0.7rem;"></div>
+
+            <!-- Coluna Central -->
+            <div class="center-column">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h4><i class="fas fa-chart-line"></i> <span id="stakingChartTitle">Staking Performance</span></h4>
+                        <span style="color:var(--neon-blue); font-size:0.7rem;">BICOIN · ETH · SOL</span>
+                    </div>
+                    <canvas id="stakingChart" height="160"></canvas>
+                </div>
+
+                <div id="cryptoSection" class="investment-section">
+                    <div class="asset-grid">
+                        <div class="asset-card">
+                            <div class="card-header-invest">
+                                <div class="asset-icon"><i class="fas fa-coins" style="color:var(--neon-blue);"></i><span class="asset-ticker">BICOIN</span></div>
+                                <div class="risk-gauge"><span style="font-size:0.6rem;" id="risk3">Risk 3/5</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><div class="risk-dot"></div></div>
+                            </div>
+                            <div class="asset-price">$10.42 <span style="font-size:0.7rem; color:var(--neon-green);">+2.3%</span></div>
+                            <div class="sparkline">📈 APY: 12% | Staked: 15,000 BICOIN</div>
+                            <div class="card-actions"><button class="buy-btn" data-asset="BICOIN"><span id="stakeBtn">STAKE</span></button><button class="sell-btn" data-asset="BICOIN"><span id="unstakeBtn">UNSTAKE</span></button></div>
+                        </div>
+                        <div class="asset-card"><div class="card-header-invest"><div class="asset-icon"><i class="fab fa-bitcoin"></i><span>Bitcoin</span></div><div class="risk-gauge"><span style="font-size:0.6rem;" id="risk4">Risk 4/5</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div></div></div><div class="asset-price">$67,234</div><div class="sparkline">APY: 3.8% | Staking Available</div><div class="card-actions"><button class="buy-btn"><span id="stakeBtcBtn">STAKE BTC</span></button><button class="sell-btn"><span id="unstakeBtcBtn">UNSTAKE</span></button></div></div>
+                        <div class="asset-card"><div class="card-header-invest"><div class="asset-icon"><i class="fab fa-ethereum"></i><span>Ethereum</span></div><div class="risk-gauge"><span style="font-size:0.6rem;" id="risk4b">Risk 4/5</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div></div></div><div class="asset-price">$3,456</div><div class="sparkline">APY: 4.2% | Staking: 32 ETH</div><div class="card-actions"><button class="buy-btn"><span id="stakeEthBtn">STAKE ETH</span></button><button class="sell-btn"><span id="unstakeEthBtn">UNSTAKE</span></button></div></div>
+                    </div>
+                </div>
+
+                <div id="rwaSection" class="investment-section" style="display:none;">
+                    <div class="asset-grid"><div class="asset-card"><div class="card-header-invest"><div class="asset-icon"><i class="fas fa-gem"></i><span id="goldTitle">Tokenized Gold</span></div><div class="risk-gauge"><span id="risk2">Risk 2/5</span></div></div><div class="asset-price">$2,345/oz</div><div class="sparkline" id="goldDesc">Real World Asset - Backed by LBMA</div><div class="card-actions"><button class="buy-btn"><span id="investBtn">INVEST</span></button></div></div></div>
+                </div>
+
+                <div id="treasuriesSection" class="investment-section" style="display:none;">
+                    <div class="asset-grid"><div class="asset-card"><div class="card-header-invest"><span>🇺🇸 10Y Treasury</span><span>4.2%</span></div><div class="asset-price">$1,000 face value</div><div class="sparkline" id="treasuryDesc">Maturity: 2034 | Risk: 1/5</div><div class="card-actions"><button class="buy-btn"><span id="buyBondBtn">BUY BOND</span></button></div></div><div class="asset-card"><div class="card-header-invest"><span>🇪🇺 Eurobond - EU</span><span>3.8%</span></div><div class="asset-price">€1,000 face value</div><div class="sparkline" id="eurobondDesc">Maturity: 2032 | AA Rated</div><div class="card-actions"><button class="buy-btn"><span id="buyEuroBondBtn">BUY BOND</span></button></div></div></div>
+                </div>
+
+                <div id="cdsSection" class="investment-section" style="display:none;">
+                    <div class="asset-grid"><div class="asset-card"><div class="card-header-invest"><span id="cd6Title">6 Month CD</span><span>5.2% APY</span></div><div class="asset-price">Min: $10,000</div><div class="sparkline" id="cd6Desc">Maturity: 6 months | Insured</div><div class="card-actions"><button class="buy-btn"><span id="subscribeBtn">SUBSCRIBE</span></button></div></div></div>
+                </div>
+
+                <div id="stocksSection" class="investment-section" style="display:none;">
+                    <div class="asset-grid"><div class="asset-card"><div class="card-header-invest"><span>AAPL</span><span>$178.50</span></div><div class="asset-price">+1.2%</div><div class="sparkline" id="aaplDesc">Market Cap: $2.8T</div><div class="card-actions"><button class="buy-btn"><span id="aaplBuyBtn">BUY</span></button><button class="sell-btn"><span id="aaplSellBtn">SELL</span></button></div></div><div class="asset-card"><div class="card-header-invest"><span>NVDA</span><span>$890.25</span></div><div class="asset-price">+2.5%</div><div class="sparkline" id="nvdaDesc">Market Cap: $2.2T</div><div class="card-actions"><button class="buy-btn"><span id="nvdaBuyBtn">BUY</span></button><button class="sell-btn"><span id="nvdaSellBtn">SELL</span></button></div></div></div>
+                </div>
+
+                <div id="reitsSection" class="investment-section" style="display:none;">
+                    <div class="asset-grid"><div class="asset-card"><div class="card-header-invest"><span>PLD - Prologis</span><span>6.2% yield</span></div><div class="asset-price">$112.50</div><div class="sparkline" id="pldDesc">Industrial REIT | Global Leader</div><div class="card-actions"><button class="buy-btn"><span id="pldInvestBtn">INVEST</span></button></div></div></div>
+                </div>
+
+                <div id="simulatorPanel" class="simulator-panel">
+                    <h4 style="color:var(--neon-blue);" id="simTitle">📊 Scenario Simulator</h4>
+                    <p style="font-size:0.75rem;" id="simDesc">Fixed Income vs. Equities projection</p>
+                    <input type="range" id="timeSlider" class="simulator-slider" min="1" max="20" value="10">
+                    <div id="simResult" style="margin-top: 1rem; font-family: 'Space Mono', monospace;">👉 Projection for 10 years: Fixed: +48% | Equities: +142%</div>
+                </div>
             </div>
-            <div class="cyber-card">
-                <div class="card-header"><h3>📤 WITHDRAW FUNDS</h3><i class="fas fa-arrow-up" style="color: #ff4466;"></i></div>
-                <input type="number" id="withdrawAmount" class="cyber-input" placeholder="Enter amount">
-                <select id="withdrawCurrency" class="cyber-input">
-                    <option value="USD">US Dollar (USD)</option><option value="EUR">Euro (EUR)</option>
-                    <option value="GBP">British Pound (GBP)</option><option value="CAD">Canadian Dollar (CAD)</option>
-                    <option value="BRL">Brazilian Real (BRL)</option><option value="AED">UAE Dirham (AED)</option>
-                </select>
-                <input type="text" id="destinationWallet" class="cyber-input" placeholder="Destination wallet address">
-                <button id="withdrawBtn" class="submit-btn">WITHDRAW FUNDS</button>
-                <div id="withdrawMsg" style="margin-top: 0.5rem; font-size: 0.7rem;"></div>
-            </div>
-            <div class="cyber-card">
-                <div class="card-header"><h3>📜 RECENT TRANSACTIONS</h3><i class="fas fa-history" style="color: #c084fc;"></i></div>
-                <div id="transactionHistory" class="transaction-list"><div class="transaction-item">✨ Welcome to Zentronix Bank</div></div>
+
+            <!-- Coluna Direita - Saldo Multi-Moedas -->
+            <div class="right-column">
+                <!-- Seção de Saldo -->
+                <div class="balance-section">
+                    <div class="balance-header">
+                        <h4><i class="fas fa-wallet"></i> <span id="balanceTitle">YOUR BALANCES</span></h4>
+                        <div class="balance-total" id="totalBalance">$0.00</div>
+                    </div>
+                    <div class="currency-grid" id="currencyGrid">
+                        <!-- Moedas serão inseridas via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="military-hub">
+                    <div class="military-header">
+                        <h4><i class="fas fa-shield-virus"></i> <span id="militaryHubTitle">MILITARY HUB</span></h4>
+                        <div class="stealth-toggle" id="stealthToggle">
+                            <span id="stealthLabel">🔒 STEALTH MODE</span>
+                            <div class="stealth-switch" id="stealthSwitch"></div>
+                        </div>
+                    </div>
+                    <div class="balance-card">
+                        <div class="balance-item"><span class="balance-currency">USD</span><span class="balance-amount" id="stealthUsd">$25,000</span></div>
+                        <div class="balance-item"><span class="balance-currency">EUR</span><span class="balance-amount" id="stealthEur">€18,000</span></div>
+                        <div class="balance-item"><span class="balance-currency">GBP</span><span class="balance-amount" id="stealthGbp">£15,000</span></div>
+                        <div class="balance-item"><span class="balance-currency">BICOIN</span><span class="balance-amount">15,000 BICOIN</span></div>
+                        <div class="balance-item"><span class="balance-currency">BTC</span><span class="balance-amount">0.42 BTC</span></div>
+                        <div class="balance-item"><span class="balance-currency">ETH</span><span class="balance-amount">4.2 ETH</span></div>
+                    </div>
+                </div>
+
+                <div class="security-seals-right">
+                    <h4><i class="fas fa-shield-alt"></i> <span id="securitySealsTitle">SECURITY CERTIFICATIONS</span></h4>
+                    <div class="seals-grid">
+                        <div class="seal-item" data-seal="ev"><i class="fas fa-lock"></i><span>EV SSL</span></div>
+                        <div class="seal-item" data-seal="pci"><i class="fab fa-cc-visa"></i><span>PCI DSS</span></div>
+                        <div class="seal-item" data-seal="soc2"><i class="fas fa-file-alt"></i><span>SOC 2</span></div>
+                        <div class="seal-item" data-seal="mcafee"><i class="fas fa-shield"></i><span>McAfee</span></div>
+                        <div class="seal-item" data-seal="iso"><i class="fas fa-certificate"></i><span>ISO 27001</span></div>
+                        <div class="seal-item" data-seal="aes"><i class="fas fa-microchip"></i><span>AES-256</span></div>
+                        <div class="seal-item" data-seal="certik"><i class="fas fa-code-branch"></i><span>CertiK</span></div>
+                        <div class="seal-item" data-seal="kyc"><i class="fas fa-id-card"></i><span>KYC/AML</span></div>
+                        <div class="seal-item" data-seal="license"><i class="fas fa-gavel"></i><span>License</span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <div class="footer">
         <div class="payment-icons">
-            <i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i>
-            <i class="fab fa-cc-amex"></i><i class="fab fa-bitcoin"></i>
-            <i class="fab fa-ethereum"></i><i class="fas fa-coins"></i>
-            <i class="fab fa-cc-paypal"></i><i class="fab fa-cc-apple-pay"></i>
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-bitcoin"></i>
+            <i class="fab fa-ethereum"></i>
+            <i class="fas fa-coins"></i>
+            <i class="fab fa-cc-paypal"></i>
+            <i class="fab fa-cc-apple-pay"></i>
         </div>
-        <div class="copyright" id="copyright">© 2024 Zentronix Bank - Offshore Banking License No. ZNTX-2024 | Secure · Private · Global | All rights reserved.</div>
+        
+        <div class="security-icons">
+            <div class="seal-cert" data-seal="ev"><i class="fas fa-lock"></i><span>EV SSL</span></div>
+            <div class="seal-cert" data-seal="pci"><i class="fab fa-cc-visa"></i><span>PCI DSS</span></div>
+            <div class="seal-cert" data-seal="soc2"><i class="fas fa-file-alt"></i><span>SOC 2</span></div>
+            <div class="seal-cert" data-seal="mcafee"><i class="fas fa-shield"></i><span>McAfee</span></div>
+            <div class="seal-cert" data-seal="iso"><i class="fas fa-certificate"></i><span>ISO 27001</span></div>
+            <div class="seal-cert" data-seal="aes"><i class="fas fa-microchip"></i><span>AES-256</span></div>
+            <div class="seal-cert" data-seal="certik"><i class="fas fa-code-branch"></i><span>CertiK</span></div>
+            <div class="seal-cert" data-seal="kyc"><i class="fas fa-id-card"></i><span>KYC/AML</span></div>
+            <div class="seal-cert" data-seal="license"><i class="fas fa-gavel"></i><span>License</span></div>
+        </div>
+        
+        <div class="regulatory-text" id="regulatoryText">
+            Zentronix Bank is currently undergoing regulatory licensing as a Virtual Asset Service Provider. All digital asset services are provided in compliance with international AML/KYC standards.
+        </div>
+        
+        <div class="copyright" id="copyright">© 2024 Zentronix Bank - Blue & Purple Edition | Offshore Banking License No. ZNTX-2024 | Quantum Secure</div>
+    </div>
+</div>
+
+<div id="orderModal" class="order-modal">
+    <div class="order-content">
+        <h3 style="color:var(--neon-blue);" id="orderTitle">Order Book</h3>
+        <div id="orderInfo"></div>
+        <div style="margin:1rem 0;"><input type="number" id="orderAmount" class="cyber-input" placeholder="Amount"><select id="orderType" class="cyber-input" style="margin-top:0.5rem;"><option id="marketOrder">Market Order</option><option id="limitOrder">Limit Order</option></select></div>
+        <button id="executeOrderBtn" class="submit-btn" style="width:100%;" id="executeBtn">EXECUTE ORDER</button>
+        <button class="close-order" style="margin-top:0.5rem; background:var(--neon-purple); border:none; padding:0.5rem; border-radius:0.5rem; width:100%; color:#0a0b1e; cursor:pointer;" id="cancelBtn">CANCEL</button>
+    </div>
+</div>
+
+<div id="securityModal" class="order-modal">
+    <div class="order-content">
+        <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--neon-blue); margin-bottom: 1rem;"></i>
+        <h3 id="modalSealTitle" style="color:var(--neon-purple);">Security Certificate</h3>
+        <p id="modalSealDesc" style="margin:1rem 0;">Certificate information here</p>
+        <button class="close-security" style="background:var(--neon-blue); border:none; padding:0.8rem; border-radius:0.8rem; width:100%; color:#0a0b1e; cursor:pointer;" id="verifiedBtn">VERIFIED ✓</button>
     </div>
 </div>
 
 <script>
-    // Create particles
     function createParticles() {
         const container = document.getElementById('particles');
-        for (let i = 0; i < 80; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = Math.random() * 4 + 1 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = 10 + Math.random() * 15 + 's';
-            container.appendChild(particle);
+        for (let i = 0; i < 60; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.width = Math.random() * 3 + 1 + 'px';
+            p.style.height = p.style.width;
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 15 + 's';
+            container.appendChild(p);
         }
     }
     createParticles();
 
-    // Translations
+    // Dados das moedas
+    const currencies = [
+        { code: 'USD', name: 'US Dollar', symbol: '$', icon: 'fa-dollar-sign', balance: 25000 },
+        { code: 'EUR', name: 'Euro', symbol: '€', icon: 'fa-euro-sign', balance: 18000 },
+        { code: 'GBP', name: 'British Pound', symbol: '£', icon: 'fa-pound-sign', balance: 15000 },
+        { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$', icon: 'fa-dollar-sign', balance: 22000 },
+        { code: 'BRL', name: 'Brazilian Real', symbol: 'R$', icon: 'fa-real', balance: 50000 }
+    ];
+
+    let userBalances = {};
+    let currentTransferCurrency = null;
+    let transactionHistory = [];
+
+    // Inicializar saldos
+    currencies.forEach(cur => {
+        userBalances[cur.code] = cur.balance;
+    });
+
+    function formatBalance(code, value) {
+        const cur = currencies.find(c => c.code === code);
+        if (code === 'USD') return `$${value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        if (code === 'EUR') return `€${value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        if (code === 'GBP') return `£${value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        if (code === 'CAD') return `C$${value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        if (code === 'BRL') return `R$${value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        return `${cur.symbol} ${value.toLocaleString()}`;
+    }
+
+    function updateTotalBalance() {
+        let total = 0;
+        total += userBalances['USD'] * 1;
+        total += userBalances['EUR'] * 1.09;
+        total += userBalances['GBP'] * 1.27;
+        total += userBalances['CAD'] * 0.73;
+        total += userBalances['BRL'] * 0.19;
+        document.getElementById('totalBalance').innerHTML = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        updateMilitaryBalances();
+    }
+
+    function updateMilitaryBalances() {
+        document.getElementById('stealthUsd') && (document.getElementById('stealthUsd').innerHTML = `$${userBalances['USD'].toLocaleString()}`);
+        document.getElementById('stealthEur') && (document.getElementById('stealthEur').innerHTML = `€${userBalances['EUR'].toLocaleString()}`);
+        document.getElementById('stealthGbp') && (document.getElementById('stealthGbp').innerHTML = `£${userBalances['GBP'].toLocaleString()}`);
+    }
+
+    function addTransaction(type, amount, currency, details = '') {
+        const date = new Date().toLocaleString();
+        const historyDiv = document.getElementById('transactionHistory');
+        if (historyDiv) {
+            const tx = document.createElement('div');
+            tx.className = 'transaction-item';
+            const symbol = currencies.find(c => c.code === currency)?.symbol || '$';
+            tx.innerHTML = `<span>${date}</span><span style="color:#ff4466">- ${symbol}${amount.toLocaleString()} ${currency}</span><span>${type.toUpperCase()}${details ? ` - ${details}` : ''}</span>`;
+            historyDiv.insertBefore(tx, historyDiv.firstChild);
+            if (historyDiv.children.length > 15) historyDiv.removeChild(historyDiv.lastChild);
+        }
+    }
+
+    function renderCurrencies() {
+        const grid = document.getElementById('currencyGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        currencies.forEach(cur => {
+            const balance = userBalances[cur.code];
+            const card = document.createElement('div');
+            card.className = 'currency-item';
+            card.innerHTML = `
+                <div class="currency-info">
+                    <i class="fas ${cur.icon}" style="color:var(--neon-blue); width: 25px;"></i>
+                    <span class="currency-name">${cur.code}</span>
+                    <span class="currency-symbol">${cur.symbol}</span>
+                </div>
+                <div class="currency-balance" data-currency="${cur.code}">${formatBalance(cur.code, balance)}</div>
+                <button class="currency-send-btn" data-currency="${cur.code}"><i class="fas fa-paper-plane"></i> SEND</button>
+            `;
+            grid.appendChild(card);
+        });
+
+        // Eventos dos botões de enviar
+        document.querySelectorAll('.currency-send-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                currentTransferCurrency = btn.dataset.currency;
+                const cur = currencies.find(c => c.code === currentTransferCurrency);
+                document.getElementById('transferTitle').innerHTML = `<i class="fas fa-paper-plane"></i> SEND ${currentTransferCurrency}`;
+                document.getElementById('transferInfo').innerHTML = `<p>Available balance: ${formatBalance(currentTransferCurrency, userBalances[currentTransferCurrency])}</p>`;
+                document.getElementById('transferAmount').value = '';
+                document.getElementById('recipientName').value = '';
+                document.getElementById('swiftCode').value = '';
+                document.getElementById('accountNumber').value = '';
+                document.getElementById('bankName').value = '';
+                document.getElementById('transferMessage').value = '';
+                document.getElementById('transferModal').style.display = 'flex';
+            });
+        });
+    }
+
+    // Confirmar transferência (enviar)
+    document.getElementById('confirmTransferBtn')?.addEventListener('click', () => {
+        const amount = parseFloat(document.getElementById('transferAmount').value);
+        const recipient = document.getElementById('recipientName').value.trim();
+        const swift = document.getElementById('swiftCode').value.trim();
+        const account = document.getElementById('accountNumber').value.trim();
+        const bank = document.getElementById('bankName').value.trim();
+        const message = document.getElementById('transferMessage').value.trim();
+
+        if (isNaN(amount) || amount <= 0) {
+            alert('Please enter a valid amount');
+            return;
+        }
+        if (!recipient) {
+            alert('Please enter the recipient name');
+            return;
+        }
+        if (!swift) {
+            alert('Please enter the SWIFT/BIC code');
+            return;
+        }
+        if (!account) {
+            alert('Please enter the account number/IBAN');
+            return;
+        }
+        if (!bank) {
+            alert('Please enter the bank name');
+            return;
+        }
+        if (amount > userBalances[currentTransferCurrency]) {
+            alert(`❌ Insufficient funds! Available: ${formatBalance(currentTransferCurrency, userBalances[currentTransferCurrency])}`);
+            return;
+        }
+
+        userBalances[currentTransferCurrency] -= amount;
+        const transferDetails = `To: ${recipient} | Bank: ${bank} | SWIFT: ${swift} | Account: ${account}${message ? ` | Msg: ${message}` : ''}`;
+        addTransaction('send', amount, currentTransferCurrency, transferDetails);
+        alert(`✅ Transfer of ${formatBalance(currentTransferCurrency, amount)} to ${recipient} (${bank}) completed successfully!\n📋 Transaction ID: ${Math.random().toString(36).substring(2, 10).toUpperCase()}`);
+        
+        renderCurrencies();
+        updateTotalBalance();
+        document.getElementById('transferModal').style.display = 'none';
+    });
+
+    // Fechar modais
+    document.querySelectorAll('.close-transfer, .close-order, .close-security').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.getElementById('orderModal') && (document.getElementById('orderModal').style.display = 'none');
+            document.getElementById('securityModal') && (document.getElementById('securityModal').style.display = 'none');
+            document.getElementById('transferModal') && (document.getElementById('transferModal').style.display = 'none');
+        });
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('orderModal')) document.getElementById('orderModal').style.display = 'none';
+        if (e.target === document.getElementById('securityModal')) document.getElementById('securityModal').style.display = 'none';
+        if (e.target === document.getElementById('transferModal')) document.getElementById('transferModal').style.display = 'none';
+        if (e.target === document.getElementById('loginModal')) closeLoginModal();
+        if (e.target === document.getElementById('profileModal')) document.getElementById('profileModal').classList.remove('active');
+        if (e.target === document.getElementById('submitModal')) document.getElementById('submitModal').classList.remove('active');
+    });
+
+    // Traduções (resumidas para o código funcionar)
     const translations = {
         en: {
-            bankTitle: "ZENTRONIX BANK", bankSubtitle: "Offshore Private Banking · Quantum Secure · Global Wealth Management",
-            heroDesc: "Zentronix Bank is a premier offshore financial institution offering cutting-edge banking solutions, asset protection, and global wealth management. With our advanced quantum-secure platform, we provide unparalleled security for your digital and traditional assets. Founded in 2018, Zentronix has become a trusted name in offshore banking, serving clients across 156 countries with innovative financial products and personalized service.",
-            aboutTitle: "🌟 ABOUT ZENTRONIX BANK",
-            currenciesTitle: "💱 CURRENCIES WE ACCEPT", cryptoTitle: "💎 SUPPORTED CRYPTOCURRENCIES",
-            assetsTitle: "Total Assets Under Management", clientsTitle: "Active Global Clients",
-            countriesTitle: "Countries Served Worldwide", securityTitle: "Security Encryption Standard",
-            submitTitle: "📄 SUBMIT VERIFICATION DOCUMENTS", dashboardTitle: "💳 YOUR DASHBOARD",
-            copyright: "© 2024 Zentronix Bank - Offshore Banking License No. ZNTX-2024 | Secure · Private · Global | All rights reserved.",
-            accessBtn: "ACCESS DASHBOARD", logoutBtn: "LOGOUT", modalTitle: "🔐 ACCESS YOUR ACCOUNT",
+            modalTitle: "ACCESS INVESTMENT HUB",
+            modalSubtitle: "SECURE • PRIVATE • QUANTUM",
+            userIdLabel: "User ID",
+            passwordLabel: "Password",
+            loginBtnText: "LOGIN",
+            closeBtnText: "CLOSE",
+            demoText: "DEMO CREDENTIALS",
+            demoId: "ID: admin",
+            demoPass: "Password: zentronix",
             loginError: "❌ Invalid credentials. Use ID: admin / Password: zentronix",
-            depositSuccess: "✅ Deposit of {{amount}} {{currency}} completed!", withdrawSuccess: "✅ Withdrawal of {{amount}} {{currency}} initiated!",
-            insufficientFunds: "❌ Insufficient funds in {{currency}} account.", submitSuccess: "✅ Documents submitted successfully! Our team will review within 24 hours."
+            bankTitle: "ZENTRONIX BANK",
+            bankSubtitle: "Offshore Private Banking · Blue & Purple Edition",
+            accessBtn: "ACCESS INVESTMENT HUB",
+            submitDocsNav: "SUBMIT DOCUMENTS",
+            logoutBtn: "LOGOUT",
+            welcomeUser: "Alexander Vance",
+            userRole: "Private Banking Elite",
+            instHeroTitle: "Zentronix Offshore Bank: Sovereignty, Technology and Financial Elite",
+            instBadge: "🏆 Leading the Offshore Revolution since 2017",
+            instDesc: "Founded in 2017, Zentronix Bank is not just a financial institution; it is a fortress for global capital.",
+            convTitle: "🌍 Total Convergence: Fiat and Crypto",
+            convDesc: "Unlike traditional banks, Zentronix was designed for the digital age.",
+            currenciesList: "USD • EUR • CHF • GBP • JPY",
+            cryptoList: "BTC • BICOIN • ETH • BNB • SOL",
+            liquidityText: "Instant Liquidity",
+            portfolioTitle: "📈 Next-Generation Investment Portfolio",
+            portfolioDesc: "Our financial product shelf is the most complete in the offshore sector.",
+            fixedIncomeTag: "Global Fixed Income",
+            wealthTag: "Wealth Management & AI",
+            peTag: "Private Equity",
+            militaryTag: "Military Sector",
+            commoditiesTag: "Commodities",
+            techTitle: "🔐 Technology, Privacy and Succession",
+            techDesc: "Zentronix Bank goes beyond simple transactions; we take care of your legacy.",
+            successionText: "Succession Planning",
+            quantumText: "Quantum Security",
+            interfaceText: "Futuristic Interface",
+            supportTitle: "🎧 24/7 Elite Support",
+            supportDesc: "Personalized service by dedicated account managers.",
+            accessTitle: "🌐 Global Accessibility",
+            accessDesc: "Platform fully adapted for English, Portuguese, Spanish and Arabic.",
+            cardTitle: "💳 Zentronix Black Card",
+            cardDesc: "International debit/credit card without borders.",
+            impactText: "✨ Zentronix Offshore Bank: The evolution of your financial power begins here. ✨",
+            foundedText: "Founded in 2017. Connected to the Future.",
+            aboutTitle: "🌟 ABOUT ZENTRONIX BANK",
+            historyTitle: "Our History",
+            historyDesc: "Founded in 2018, serving 156+ countries",
+            securityTitle: "Security First",
+            securityDesc: "Quantum-resistant protocols",
+            globalTitle: "Global Reach",
+            globalDesc: "Offices in Switzerland, Singapore, Dubai",
+            returnsTitle: "Premium Returns",
+            returnsDesc: "Up to 12% annual yield",
+            currenciesTitle: "💱 CURRENCIES WE ACCEPT",
+            cryptoTitle: "💎 SUPPORTED CRYPTOCURRENCIES",
+            aumText: "AUM",
+            clientsText: "Clients",
+            countriesText: "Countries",
+            encryptionText: "Encryption",
+            stakingMenu: "Staking Center",
+            rwaMenu: "RWA & NFTs",
+            treasuriesMenu: "Treasuries & Bonds",
+            cdsMenu: "CDs / Time Deposits",
+            stocksMenu: "Nasdaq/NYSE",
+            reitsMenu: "REITs Center",
+            ghostMenu: "Ghost Mode",
+            simulatorMenu: "Scenario Simulator",
+            themesMenu: "Theme Weaver",
+            auditMenu: "Audit Logs",
+            stakingChartTitle: "Staking Performance",
+            militaryHubTitle: "MILITARY HUB",
+            stealthLabel: "STEALTH MODE",
+            securitySealsTitle: "SECURITY CERTIFICATIONS",
+            balanceTitle: "YOUR BALANCES",
+            submitModalTitle: "SUBMIT VERIFICATION DOCUMENTS",
+            fullNameLabelDoc: "Full Name",
+            emailLabelDoc: "Email Address",
+            phoneLabelDoc: "Phone Number",
+            docTypeLabelDoc: "Document Type",
+            passportOption: "Passport",
+            idOption: "Identity Card",
+            driverOption: "Driver's License",
+            nationalOption: "National ID",
+            uploadLabelDoc: "Upload Documents",
+            uploadText: "Click or drag files here<br>PDF, JPG, PNG up to 10MB",
+            notesLabelDoc: "Notes (optional)",
+            submitDocsBtnText: "SUBMIT DOCUMENTS",
+            successMsg: "Documents submitted successfully! Our team will review within 24 hours.",
+            orderTitle: "Order Book",
+            marketOrder: "Market Order",
+            limitOrder: "Limit Order",
+            executeBtn: "EXECUTE ORDER",
+            cancelBtn: "CANCEL",
+            verifiedBtn: "VERIFIED ✓",
+            regulatoryText: "Zentronix Bank is currently undergoing regulatory licensing as a Virtual Asset Service Provider.",
+            profileTitle: "EDIT PROFILE",
+            fullNameLabel: "Full Name",
+            emailLabelProfile: "Email Address",
+            objectiveLabel: "Investment Objective",
+            saveProfileText: "SAVE CHANGES"
         },
         pt: {
-            bankTitle: "BANCO ZENTRONIX", bankSubtitle: "Banking Offshore Privado · Segurança Quântica · Gestão de Patrimônio Global",
-            heroDesc: "O Banco Zentronix é uma instituição financeira offshore de primeira linha que oferece soluções bancárias de ponta, proteção de ativos e gestão de patrimônio global. Fundado em 2018, o Zentronix tornou-se um nome confiável em banking offshore, atendendo clientes em 156 países.",
-            aboutTitle: "🌟 SOBRE O BANCO ZENTRONIX",
-            currenciesTitle: "💱 MOEDAS ACEITAS", cryptoTitle: "💎 CRIPTOMOEDAS SUPORTADAS",
-            assetsTitle: "Ativos sob Gestão", clientsTitle: "Clientes Ativos Globais",
-            countriesTitle: "Países Atendidos", securityTitle: "Padrão de Criptografia",
-            submitTitle: "📄 ENVIAR DOCUMENTOS DE VERIFICAÇÃO", dashboardTitle: "💳 SEU DASHBOARD",
-            copyright: "© 2024 Banco Zentronix - Licença Bancária Offshore Nº ZNTX-2024 | Seguro · Privado · Global",
-            accessBtn: "ACESSAR DASHBOARD", logoutBtn: "SAIR", modalTitle: "🔐 ACESSE SUA CONTA",
+            modalTitle: "ACESSAR HUB DE INVESTIMENTOS",
+            modalSubtitle: "SEGURO • PRIVADO • QUÂNTICO",
+            userIdLabel: "ID do Usuário",
+            passwordLabel: "Senha",
+            loginBtnText: "ENTRAR",
+            closeBtnText: "FECHAR",
+            demoText: "CREDENCIAIS DE DEMO",
+            demoId: "ID: admin",
+            demoPass: "Senha: zentronix",
             loginError: "❌ Credenciais inválidas. Use ID: admin / Senha: zentronix",
-            depositSuccess: "✅ Depósito de {{amount}} {{currency}} concluído!", withdrawSuccess: "✅ Saque de {{amount}} {{currency}} iniciado!",
-            insufficientFunds: "❌ Saldo insuficiente na conta {{currency}}.", submitSuccess: "✅ Documentos enviados com sucesso! Nossa equipe analisará em 24 horas."
+            bankTitle: "BANCO ZENTRONIX",
+            bankSubtitle: "Banking Offshore · Edição Azul & Roxa",
+            accessBtn: "ACESSAR HUB DE INVESTIMENTOS",
+            submitDocsNav: "ENVIAR DOCUMENTOS",
+            logoutBtn: "SAIR",
+            welcomeUser: "Alexandre Vance",
+            userRole: "Elite Private Banking",
+            instHeroTitle: "Zentronix Offshore Bank: Soberania, Tecnologia e Elite Financeira",
+            instBadge: "🏆 Liderando a Revolução Offshore desde 2017",
+            instDesc: "Fundado em 2017, o Zentronix Bank não é apenas uma instituição financeira; é uma fortaleza para o capital global.",
+            convTitle: "🌍 Convergência Total: Fiduciário e Cripto",
+            convDesc: "Diferente dos bancos tradicionais, o Zentronix foi projetado para a era digital.",
+            currenciesList: "USD • EUR • CHF • GBP • JPY",
+            cryptoList: "BTC • BICOIN • ETH • BNB • SOL",
+            liquidityText: "Liquidez Instantânea",
+            portfolioTitle: "📈 Portfólio de Investimentos de Nova Geração",
+            portfolioDesc: "Nossa prateleira de produtos financeiros é a mais completa do setor offshore.",
+            fixedIncomeTag: "Renda Fixa Global",
+            wealthTag: "Wealth Management & IA",
+            peTag: "Private Equity",
+            militaryTag: "Setor Militar",
+            commoditiesTag: "Commodities",
+            techTitle: "🔐 Tecnologia, Privacidade e Sucessão",
+            techDesc: "O Zentronix Bank vai além das transações simples; nós cuidamos do seu legado.",
+            successionText: "Planejamento Sucessório",
+            quantumText: "Segurança Quântica",
+            interfaceText: "Interface Futurista",
+            supportTitle: "🎧 Suporte Elite 24/7",
+            supportDesc: "Atendimento personalizado por gestores de conta dedicados.",
+            accessTitle: "🌐 Acessibilidade Global",
+            accessDesc: "Plataforma totalmente adaptada para Inglês, Português, Espanhol e Árabe.",
+            cardTitle: "💳 Cartão Zentronix Black",
+            cardDesc: "Cartão de débito/crédito internacional sem limites de fronteiras.",
+            impactText: "✨ Zentronix Offshore Bank: A evolução do seu poder financeiro começa aqui. ✨",
+            foundedText: "Fundado em 2017. Conectado ao Futuro.",
+            aboutTitle: "🌟 SOBRE O BANCO ZENTRONIX",
+            historyTitle: "Nossa História",
+            historyDesc: "Fundado em 2018, atendendo 156+ países",
+            securityTitle: "Segurança em Primeiro Lugar",
+            securityDesc: "Protocolos resistentes a quantum",
+            globalTitle: "Alcance Global",
+            globalDesc: "Escritórios na Suíça, Singapura, Dubai",
+            returnsTitle: "Retornos Premium",
+            returnsDesc: "Até 12% de rendimento anual",
+            currenciesTitle: "💱 MOEDAS ACEITAS",
+            cryptoTitle: "💎 CRIPTOMOEDAS SUPORTADAS",
+            aumText: "Patrimônio sob Gestão",
+            clientsText: "Clientes",
+            countriesText: "Países",
+            encryptionText: "Criptografia",
+            stakingMenu: "Centro de Staking",
+            rwaMenu: "RWA & NFTs",
+            treasuriesMenu: "Títulos e Bonds",
+            cdsMenu: "CDs / Depósitos",
+            stocksMenu: "Nasdaq/NYSE",
+            reitsMenu: "Centro REITs",
+            ghostMenu: "Modo Fantasma",
+            simulatorMenu: "Simulador de Cenários",
+            themesMenu: "Seletor de Temas",
+            auditMenu: "Registros de Auditoria",
+            stakingChartTitle: "Performance de Staking",
+            militaryHubTitle: "HUB MILITAR",
+            stealthLabel: "MODO STEALTH",
+            securitySealsTitle: "CERTIFICAÇÕES DE SEGURANÇA",
+            balanceTitle: "SEUS SALDOS",
+            submitModalTitle: "ENVIAR DOCUMENTOS DE VERIFICAÇÃO",
+            fullNameLabelDoc: "Nome Completo",
+            emailLabelDoc: "E-mail",
+            phoneLabelDoc: "Telefone",
+            docTypeLabelDoc: "Tipo de Documento",
+            passportOption: "Passaporte",
+            idOption: "RG / Carteira de Identidade",
+            driverOption: "Carteira de Motorista",
+            nationalOption: "Documento Nacional",
+            uploadLabelDoc: "Envio de Documentos",
+            uploadText: "Clique ou arraste arquivos aqui<br>PDF, JPG, PNG até 10MB",
+            notesLabelDoc: "Observações (opcional)",
+            submitDocsBtnText: "ENVIAR DOCUMENTOS",
+            successMsg: "Documentos enviados com sucesso! Nossa equipe analisará em até 24 horas.",
+            orderTitle: "Livro de Ordens",
+            marketOrder: "Ordem de Mercado",
+            limitOrder: "Ordem Limitada",
+            executeBtn: "EXECUTAR ORDEM",
+            cancelBtn: "CANCELAR",
+            verifiedBtn: "VERIFICADO ✓",
+            regulatoryText: "O Zentronix Bank está atualmente em processo de licenciamento regulatório como Provedor de Serviços de Ativos Virtuais.",
+            profileTitle: "EDITAR PERFIL",
+            fullNameLabel: "Nome Completo",
+            emailLabelProfile: "E-mail",
+            objectiveLabel: "Objetivo de Investimento",
+            saveProfileText: "SALVAR ALTERAÇÕES"
         },
         es: {
-            bankTitle: "BANCO ZENTRONIX", bankSubtitle: "Banca Privada Offshore · Seguridad Cuántica · Gestión de Patrimonio Global",
-            heroDesc: "Zentronix Bank es una institución financiera offshore de primer nivel que ofrece soluciones bancarias de vanguardia, protección de activos y gestión de patrimonios globales. Fundado en 2018, Zentronix se ha convertido en un nombre confiable en la banca offshore.",
-            aboutTitle: "🌟 SOBRE ZENTRONIX BANK",
-            currenciesTitle: "💱 MONEDAS ACEPTADAS", cryptoTitle: "💎 CRIPTOMONEDAS SOPORTADAS",
-            assetsTitle: "Activos bajo Gestión", clientsTitle: "Clientes Activos Globales",
-            countriesTitle: "Países Atendidos", securityTitle: "Estándar de Cifrado",
-            submitTitle: "📄 ENVIAR DOCUMENTOS DE VERIFICACIÓN", dashboardTitle: "💳 SU TABLERO",
-            copyright: "© 2024 Banco Zentronix - Licencia Bancaria Offshore N° ZNTX-2024 | Seguro · Privado · Global",
-            accessBtn: "ACCEDER AL DASHBOARD", logoutBtn: "SALIR", modalTitle: "🔐 ACCEDA A SU CUENTA",
+            modalTitle: "ACCEDER AL HUB DE INVERSIÓN",
+            modalSubtitle: "SEGURO • PRIVADO • CUÁNTICO",
+            userIdLabel: "ID de Usuario",
+            passwordLabel: "Contraseña",
+            loginBtnText: "INGRESAR",
+            closeBtnText: "CERRAR",
+            demoText: "CREDENCIALES DE DEMO",
+            demoId: "ID: admin",
+            demoPass: "Contraseña: zentronix",
             loginError: "❌ Credenciales inválidas. Use ID: admin / Contraseña: zentronix",
-            depositSuccess: "✅ Depósito de {{amount}} {{currency}} completado!", withdrawSuccess: "✅ Retiro de {{amount}} {{currency}} iniciado!",
-            insufficientFunds: "❌ Fondos insuficientes en cuenta {{currency}}.", submitSuccess: "✅ Documentos enviados con éxito! Nuestro equipo revisará en 24 horas."
+            bankTitle: "BANCO ZENTRONIX",
+            bankSubtitle: "Banca Offshore · Edición Azul & Púrpura",
+            accessBtn: "ACCEDER AL HUB DE INVERSIÓN",
+            submitDocsNav: "ENVIAR DOCUMENTOS",
+            logoutBtn: "SALIR",
+            welcomeUser: "Alejandro Vance",
+            userRole: "Elite Private Banking",
+            instHeroTitle: "Zentronix Offshore Bank: Soberanía, Tecnología y Elite Financiera",
+            instBadge: "🏆 Liderando la Revolución Offshore desde 2017",
+            instDesc: "Fundado en 2017, Zentronix Bank no es solo una institución financiera; es una fortaleza para el capital global.",
+            convTitle: "🌍 Convergencia Total: Fiduciario y Cripto",
+            convDesc: "A diferencia de los bancos tradicionales, Zentronix fue diseñado para la era digital.",
+            currenciesList: "USD • EUR • CHF • GBP • JPY",
+            cryptoList: "BTC • BICOIN • ETH • BNB • SOL",
+            liquidityText: "Liquidez Instantánea",
+            portfolioTitle: "📈 Portafolio de Inversiones de Nueva Generación",
+            portfolioDesc: "Nuestro estante de productos financieros es el más completo del sector offshore.",
+            fixedIncomeTag: "Renta Fija Global",
+            wealthTag: "Wealth Management & IA",
+            peTag: "Private Equity",
+            militaryTag: "Sector Militar",
+            commoditiesTag: "Materias Primas",
+            techTitle: "🔐 Tecnología, Privacidad y Sucesión",
+            techDesc: "Zentronix Bank va más allá de las transacciones simples; cuidamos su legado.",
+            successionText: "Planificación Sucesoria",
+            quantumText: "Seguridad Cuántica",
+            interfaceText: "Interfaz Futurista",
+            supportTitle: "🎧 Soporte Elite 24/7",
+            supportDesc: "Servicio personalizado por gestores de cuenta dedicados.",
+            accessTitle: "🌐 Accesibilidad Global",
+            accessDesc: "Plataforma totalmente adaptada para Inglés, Portugués, Español y Árabe.",
+            cardTitle: "💳 Tarjeta Zentronix Black",
+            cardDesc: "Tarjeta de débito/crédito internacional sin fronteras.",
+            impactText: "✨ Zentronix Offshore Bank: La evolución de su poder financiero comienza aquí. ✨",
+            foundedText: "Fundado en 2017. Conectado al Futuro.",
+            aboutTitle: "🌟 SOBRE ZENTRONIX BANK",
+            historyTitle: "Nuestra Historia",
+            historyDesc: "Fundado en 2018, sirviendo a 156+ países",
+            securityTitle: "Seguridad Primero",
+            securityDesc: "Protocolos resistentes a cuánticos",
+            globalTitle: "Alcance Global",
+            globalDesc: "Oficinas en Suiza, Singapur, Dubái",
+            returnsTitle: "Rendimientos Premium",
+            returnsDesc: "Hasta 12% de rendimiento anual",
+            currenciesTitle: "💱 MONEDAS ACEPTADAS",
+            cryptoTitle: "💎 CRIPTOMONEDAS SOPORTADAS",
+            aumText: "Patrimonio Gestionado",
+            clientsText: "Clientes",
+            countriesText: "Países",
+            encryptionText: "Cifrado",
+            stakingMenu: "Centro de Staking",
+            rwaMenu: "RWA & NFTs",
+            treasuriesMenu: "Tesoros y Bonos",
+            cdsMenu: "CDs / Depósitos",
+            stocksMenu: "Nasdaq/NYSE",
+            reitsMenu: "Centro REITs",
+            ghostMenu: "Modo Fantasma",
+            simulatorMenu: "Simulador de Escenarios",
+            themesMenu: "Selector de Temas",
+            auditMenu: "Registros de Auditoría",
+            stakingChartTitle: "Rendimiento de Staking",
+            militaryHubTitle: "HUB MILITAR",
+            stealthLabel: "MODO STEALTH",
+            securitySealsTitle: "CERTIFICACIONES DE SEGURIDAD",
+            balanceTitle: "SUS SALDOS",
+            submitModalTitle: "ENVIAR DOCUMENTOS DE VERIFICACIÓN",
+            fullNameLabelDoc: "Nombre Completo",
+            emailLabelDoc: "Correo Electrónico",
+            phoneLabelDoc: "Teléfono",
+            docTypeLabelDoc: "Tipo de Documento",
+            passportOption: "Pasaporte",
+            idOption: "Cédula de Identidad",
+            driverOption: "Licencia de Conducir",
+            nationalOption: "Documento Nacional",
+            uploadLabelDoc: "Subir Documentos",
+            uploadText: "Haga clic o arrastre archivos aquí<br>PDF, JPG, PNG hasta 10MB",
+            notesLabelDoc: "Notas (opcional)",
+            submitDocsBtnText: "ENVIAR DOCUMENTOS",
+            successMsg: "¡Documentos enviados con éxito! Nuestro equipo revisará en 24 horas.",
+            orderTitle: "Libro de Órdenes",
+            marketOrder: "Orden de Mercado",
+            limitOrder: "Orden Limitada",
+            executeBtn: "EJECUTAR ORDEN",
+            cancelBtn: "CANCELAR",
+            verifiedBtn: "VERIFICADO ✓",
+            regulatoryText: "Zentronix Bank se encuentra actualmente en proceso de licenciamiento regulatorio como Proveedor de Servicios de Activos Virtuales.",
+            profileTitle: "EDITAR PERFIL",
+            fullNameLabel: "Nombre Completo",
+            emailLabelProfile: "Correo Electrónico",
+            objectiveLabel: "Objetivo de Inversión",
+            saveProfileText: "GUARDAR CAMBIOS"
         },
         ar: {
-            bankTitle: "بنك زينترونكس", bankSubtitle: "خدمات مصرفية خاصة خارجية · أمان كمي · إدارة الثروات العالمية",
-            heroDesc: "بنك زينترونكس هو مؤسسة مالية خارجية رائدة تقدم حلولاً مصرفية متطورة وحماية الأصول وإدارة الثروات العالمية. تأسس في 2018، أصبح زينترونكس اسماً موثوقاً في الخدمات المصرفية الخارجية.",
+            modalTitle: "الوصول إلى مركز الاستثمار",
+            modalSubtitle: "آمن • خاص • كمي",
+            userIdLabel: "معرف المستخدم",
+            passwordLabel: "كلمة المرور",
+            loginBtnText: "دخول",
+            closeBtnText: "إغلاق",
+            demoText: "بيانات اعتماد تجريبية",
+            demoId: "المعرف: admin",
+            demoPass: "كلمة المرور: zentronix",
+            loginError: "❌ بيانات اعتماد غير صالحة. استخدم المعرف: admin / كلمة المرور: zentronix",
+            bankTitle: "بنك زينترونكس",
+            bankSubtitle: "خدمات مصرفية خارجية · الإصدار الأزرق والأرجواني",
+            accessBtn: "الوصول إلى مركز الاستثمار",
+            submitDocsNav: "إرسال المستندات",
+            logoutBtn: "خروج",
+            welcomeUser: "الكسندر فانس",
+            userRole: "النخبة المصرفية الخاصة",
+            instHeroTitle: "بنك زينترونكس الخارجي: السيادة والتكنولوجيا والنخبة المالية",
+            instBadge: "🏆 قيادة الثورة الخارجية منذ 2017",
+            instDesc: "تأسس بنك زينترونكس في عام 2017، وليس مجرد مؤسسة مالية؛ بل هو حصن لرأس المال العالمي.",
+            convTitle: "🌍 التقارب الكلي: العملات الورقية والعملات المشفرة",
+            convDesc: "على عكس البنوك التقليدية، تم تصميم Zentronix للعصر الرقمي.",
+            currenciesList: "USD • EUR • CHF • GBP • JPY",
+            cryptoList: "BTC • BICOIN • ETH • BNB • SOL",
+            liquidityText: "سيولة فورية",
+            portfolioTitle: "📈 محفظة استثمارات الجيل الجديد",
+            portfolioDesc: "رف منتجاتنا المالية هو الأكثر اكتمالاً في القطاع الخارجي.",
+            fixedIncomeTag: "الدخل الثابت العالمي",
+            wealthTag: "إدارة الثروات والذكاء الاصطناعي",
+            peTag: "الأسهم الخاصة",
+            militaryTag: "القطاع العسكري",
+            commoditiesTag: "السلع الأساسية",
+            techTitle: "🔐 التكنولوجيا والخصوصية والخلافة",
+            techDesc: "بنك Zentronix يتجاوز المعاملات البسيطة؛ نحن نعتني بإرثك.",
+            successionText: "التخطيط للخلافة",
+            quantumText: "الأمان الكمي",
+            interfaceText: "واجهة مستقبلية",
+            supportTitle: "🎧 دعم النخبة على مدار الساعة",
+            supportDesc: "خدمة شخصية من قبل مديري حسابات مخصصين.",
+            accessTitle: "🌐 إمكانية الوصول العالمية",
+            accessDesc: "منصة مكيفة بالكامل للغة الإنجليزية والبرتغالية والإسبانية والعربية.",
+            cardTitle: "💳 بطاقة Zentronix Black",
+            cardDesc: "بطاقة خصم/ائتمان دولية بلا حدود.",
+            impactText: "✨ بنك Zentronix الخارجي: تطور قوتك المالية يبدأ هنا. ✨",
+            foundedText: "تأسس في 2017. متصل بالمستقبل.",
             aboutTitle: "🌟 حول بنك زينترونكس",
-            currenciesTitle: "💱 العملات المقبولة", cryptoTitle: "💎 العملات المشفرة المدعومة",
-            assetsTitle: "إجمالي الأصول المدارة", clientsTitle: "العملاء النشطاء عالمياً",
-            countriesTitle: "البلدان المخدومة", securityTitle: "معيار التشفير",
-            submitTitle: "📄 إرسال مستندات التحقق", dashboardTitle: "💳 لوحة التحكم الخاصة بك",
-            copyright: "© 2024 بنك زينترونكس - ترخيص مصرفي خارجي رقم ZNTX-2024 | آمن · خاص · عالمي",
-            accessBtn: "الوصول إلى لوحة التحكم", logoutBtn: "خروج", modalTitle: "🔐 الوصول إلى حسابك",
-            loginError: "❌ بيانات اعتماد غير صالحة. استخدم ID: admin / كلمة المرور: zentronix",
-            depositSuccess: "✅ تم إيداع {{amount}} {{currency}} بنجاح!", withdrawSuccess: "✅ تم بدء سحب {{amount}} {{currency}}!",
-            insufficientFunds: "❌ أموال غير كافية في حساب {{currency}}.", submitSuccess: "✅ تم إرسال المستندات بنجاح! سيقوم فريقنا بالمراجعة خلال 24 ساعة."
+            historyTitle: "تاريخنا",
+            historyDesc: "تأسس في 2018، يخدم أكثر من 156 دولة",
+            securityTitle: "الأمان أولاً",
+            securityDesc: "بروتوكولات مقاومة الكم",
+            globalTitle: "الوصول العالمي",
+            globalDesc: "مكاتب في سويسرا وسنغافورة ودبي",
+            returnsTitle: "عوائد ممتازة",
+            returnsDesc: "حتى 12٪ عائد سنوي",
+            currenciesTitle: "💱 العملات المقبولة",
+            cryptoTitle: "💎 العملات المشفرة المدعومة",
+            aumText: "الأصول المدارة",
+            clientsText: "العملاء",
+            countriesText: "الدول",
+            encryptionText: "التشفير",
+            stakingMenu: "مركز التوقيع المساحي",
+            rwaMenu: "الأصول الحقيقية والرموز غير القابلة للاستبدال",
+            treasuriesMenu: "السندات والخزائن",
+            cdsMenu: "شهادات الإيداع / الودائع لأجل",
+            stocksMenu: "ناسداك/نيويورك",
+            reitsMenu: "مركز صناديق الاستثمار العقاري",
+            ghostMenu: "الوضع الشبح",
+            simulatorMenu: "محاكاة السيناريو",
+            themesMenu: "منسق السمات",
+            auditMenu: "سجلات التدقيق",
+            stakingChartTitle: "أداء التوقيع المساحي",
+            militaryHubTitle: "المركز العسكري",
+            stealthLabel: "وضع التخفي",
+            securitySealsTitle: "شهادات الأمان",
+            balanceTitle: "أرصدتك",
+            submitModalTitle: "إرسال مستندات التحقق",
+            fullNameLabelDoc: "الاسم الكامل",
+            emailLabelDoc: "البريد الإلكتروني",
+            phoneLabelDoc: "رقم الهاتف",
+            docTypeLabelDoc: "نوع المستند",
+            passportOption: "جواز السفر",
+            idOption: "بطاقة الهوية",
+            driverOption: "رخصة القيادة",
+            nationalOption: "الهوية الوطنية",
+            uploadLabelDoc: "تحميل المستندات",
+            uploadText: "انقر أو اسحب الملفات هنا<br>PDF, JPG, PNG حتى 10MB",
+            notesLabelDoc: "ملاحظات (اختياري)",
+            submitDocsBtnText: "إرسال المستندات",
+            successMsg: "تم إرسال المستندات بنجاح! سيقوم فريقنا بالمراجعة خلال 24 ساعة.",
+            orderTitle: "دفتر الأوامر",
+            marketOrder: "أمر السوق",
+            limitOrder: "أمر الحد",
+            executeBtn: "تنفيذ الأمر",
+            cancelBtn: "إلغاء",
+            verifiedBtn: "تم التحقق ✓",
+            regulatoryText: "يخضع بنك Zentronix حالياً للترخيص التنظيمي كمزود خدمات الأصول الافتراضية.",
+            profileTitle: "تحرير الملف الشخصي",
+            fullNameLabel: "الاسم الكامل",
+            emailLabelProfile: "البريد الإلكتروني",
+            objectiveLabel: "هدف الاستثمار",
+            saveProfileText: "حفظ التغييرات"
         }
     };
 
     let currentLang = localStorage.getItem('zentronix_lang') || 'en';
     let isLoggedIn = false;
-    let balances = { USD: 25000, EUR: 18000, GBP: 15000, CAD: 22000, BRL: 50000, AED: 70000 };
+    let ghostActive = false;
+    let stakingChart;
+    let userProfile = {
+        fullName: "Alexander Vance",
+        email: "alexander.vance@zentronix.com",
+        objective: "moderate"
+    };
+    let uploadedFiles = [];
 
     function updateLanguage() {
         const t = translations[currentLang];
-        if (!t) return;
+        if(!t) return;
+        
+        document.getElementById('modalTitle').innerText = t.modalTitle;
+        document.getElementById('modalSubtitle').innerText = t.modalSubtitle;
+        document.getElementById('userIdLabel').innerHTML = `<i class="fas fa-user"></i> ${t.userIdLabel}`;
+        document.getElementById('passwordLabel').innerHTML = `<i class="fas fa-lock"></i> ${t.passwordLabel}`;
+        document.getElementById('loginBtnText').innerHTML = `<i class="fas fa-sign-in-alt"></i> ${t.loginBtnText}`;
+        document.getElementById('closeBtnText').innerHTML = `<i class="fas fa-times"></i> ${t.closeBtnText}`;
+        document.getElementById('demoText').innerHTML = `<i class="fas fa-flask"></i> ${t.demoText}`;
+        document.getElementById('demoId').innerHTML = t.demoId;
+        document.getElementById('demoPass').innerHTML = t.demoPass;
         
         document.getElementById('bankTitle').innerText = t.bankTitle;
         document.getElementById('bankSubtitle').innerText = t.bankSubtitle;
-        document.getElementById('heroDesc').innerText = t.heroDesc;
-        document.getElementById('aboutTitle').innerText = t.aboutTitle;
-        document.getElementById('currenciesTitle').innerText = t.currenciesTitle;
-        document.getElementById('cryptoTitle').innerText = t.cryptoTitle;
-        document.getElementById('assetsTitle').innerText = t.assetsTitle;
-        document.getElementById('clientsTitle').innerText = t.clientsTitle;
-        document.getElementById('countriesTitle').innerText = t.countriesTitle;
-        document.getElementById('securityTitle').innerText = t.securityTitle;
-        document.getElementById('submitTitle').innerText = t.submitTitle;
-        if (isLoggedIn) document.getElementById('dashboardTitle').innerText = t.dashboardTitle;
-        document.getElementById('copyright').innerText = t.copyright;
         document.getElementById('accessBtnText').innerText = t.accessBtn;
+        document.getElementById('submitDocsNavText').innerText = t.submitDocsNav;
         document.getElementById('logoutBtnText').innerText = t.logoutBtn;
-        document.getElementById('modalTitle').innerText = t.modalTitle;
+        document.getElementById('welcomeUser').innerText = userProfile.fullName;
+        document.getElementById('userRole').innerText = t.userRole;
+        
+        document.getElementById('instHeroTitle').innerText = t.instHeroTitle;
+        document.getElementById('instBadge').innerHTML = t.instBadge;
+        document.getElementById('instDesc').innerText = t.instDesc;
+        document.getElementById('convTitle').innerHTML = t.convTitle;
+        document.getElementById('convDesc').innerText = t.convDesc;
+        document.getElementById('currenciesList').innerText = t.currenciesList;
+        document.getElementById('cryptoList').innerText = t.cryptoList;
+        document.getElementById('liquidityText').innerText = t.liquidityText;
+        document.getElementById('portfolioTitle').innerHTML = t.portfolioTitle;
+        document.getElementById('portfolioDesc').innerText = t.portfolioDesc;
+        document.getElementById('fixedIncomeTag').innerHTML = `<i class="fas fa-chart-pie"></i> ${t.fixedIncomeTag}`;
+        document.getElementById('wealthTag').innerHTML = `<i class="fas fa-brain"></i> ${t.wealthTag}`;
+        document.getElementById('peTag').innerHTML = `<i class="fas fa-rocket"></i> ${t.peTag}`;
+        document.getElementById('militaryTag').innerHTML = `<i class="fas fa-shield-virus"></i> ${t.militaryTag}`;
+        document.getElementById('commoditiesTag').innerHTML = `<i class="fas fa-gem"></i> ${t.commoditiesTag}`;
+        document.getElementById('techTitle').innerHTML = t.techTitle;
+        document.getElementById('techDesc').innerText = t.techDesc;
+        document.getElementById('successionText').innerText = t.successionText;
+        document.getElementById('quantumText').innerText = t.quantumText;
+        document.getElementById('interfaceText').innerText = t.interfaceText;
+        document.getElementById('supportTitle').innerHTML = t.supportTitle;
+        document.getElementById('supportDesc').innerText = t.supportDesc;
+        document.getElementById('accessTitle').innerHTML = t.accessTitle;
+        document.getElementById('accessDesc').innerText = t.accessDesc;
+        document.getElementById('cardTitle').innerHTML = t.cardTitle;
+        document.getElementById('cardDesc').innerText = t.cardDesc;
+        document.getElementById('impactText').innerHTML = t.impactText;
+        document.getElementById('foundedText').innerText = t.foundedText;
+        
+        document.getElementById('aboutTitle').innerHTML = t.aboutTitle;
+        document.getElementById('historyTitle').innerText = t.historyTitle;
+        document.getElementById('historyDesc').innerText = t.historyDesc;
+        document.getElementById('securityTitle').innerText = t.securityTitle;
+        document.getElementById('securityDesc').innerText = t.securityDesc;
+        document.getElementById('globalTitle').innerText = t.globalTitle;
+        document.getElementById('globalDesc').innerText = t.globalDesc;
+        document.getElementById('returnsTitle').innerText = t.returnsTitle;
+        document.getElementById('returnsDesc').innerText = t.returnsDesc;
+        document.getElementById('currenciesTitle').innerHTML = t.currenciesTitle;
+        document.getElementById('cryptoTitle').innerHTML = t.cryptoTitle;
+        document.getElementById('aumText').innerText = t.aumText;
+        document.getElementById('clientsText').innerText = t.clientsText;
+        document.getElementById('countriesText').innerText = t.countriesText;
+        document.getElementById('encryptionText').innerText = t.encryptionText;
+        
+        document.getElementById('stakingMenu').innerText = t.stakingMenu;
+        document.getElementById('rwaMenu').innerText = t.rwaMenu;
+        document.getElementById('treasuriesMenu').innerText = t.treasuriesMenu;
+        document.getElementById('cdsMenu').innerText = t.cdsMenu;
+        document.getElementById('stocksMenu').innerText = t.stocksMenu;
+        document.getElementById('reitsMenu').innerText = t.reitsMenu;
+        document.getElementById('ghostMenu').innerText = t.ghostMenu;
+        document.getElementById('simulatorMenu').innerText = t.simulatorMenu;
+        document.getElementById('themesMenu').innerText = t.themesMenu;
+        document.getElementById('auditMenu').innerText = t.auditMenu;
+        document.getElementById('stakingChartTitle').innerHTML = `<i class="fas fa-chart-line"></i> ${t.stakingChartTitle}`;
+        
+        document.getElementById('militaryHubTitle').innerHTML = `<i class="fas fa-shield-virus"></i> ${t.militaryHubTitle}`;
+        document.getElementById('stealthLabel').innerHTML = `🔒 ${t.stealthLabel}`;
+        document.getElementById('securitySealsTitle').innerHTML = `<i class="fas fa-shield-alt"></i> ${t.securitySealsTitle}`;
+        document.getElementById('balanceTitle').innerHTML = `<i class="fas fa-wallet"></i> ${t.balanceTitle}`;
+        
+        document.getElementById('submitModalTitle').innerHTML = `<i class="fas fa-file-alt"></i> ${t.submitModalTitle}`;
+        document.getElementById('fullNameLabelDoc').innerHTML = `<i class="fas fa-user"></i> ${t.fullNameLabelDoc}`;
+        document.getElementById('emailLabelDoc').innerHTML = `<i class="fas fa-envelope"></i> ${t.emailLabelDoc}`;
+        document.getElementById('phoneLabelDoc').innerHTML = `<i class="fas fa-phone"></i> ${t.phoneLabelDoc}`;
+        document.getElementById('docTypeLabelDoc').innerHTML = `<i class="fas fa-id-card"></i> ${t.docTypeLabelDoc}`;
+        document.getElementById('passportOption').innerText = t.passportOption;
+        document.getElementById('idOption').innerText = t.idOption;
+        document.getElementById('driverOption').innerText = t.driverOption;
+        document.getElementById('nationalOption').innerText = t.nationalOption;
+        document.getElementById('uploadLabelDoc').innerHTML = `<i class="fas fa-upload"></i> ${t.uploadLabelDoc}`;
+        document.getElementById('uploadText').innerHTML = t.uploadText;
+        document.getElementById('notesLabelDoc').innerHTML = `<i class="fas fa-sticky-note"></i> ${t.notesLabelDoc}`;
+        document.getElementById('submitDocsBtnText').innerHTML = `<i class="fas fa-paper-plane"></i> ${t.submitDocsBtnText}`;
+        document.getElementById('successMsg').innerHTML = `<i class="fas fa-check-circle"></i> ${t.successMsg}`;
+        
+        document.getElementById('orderTitle').innerText = t.orderTitle;
+        document.getElementById('marketOrder').innerText = t.marketOrder;
+        document.getElementById('limitOrder').innerText = t.limitOrder;
+        document.getElementById('executeBtn').innerText = t.executeBtn;
+        document.getElementById('cancelBtn').innerText = t.cancelBtn;
+        document.getElementById('verifiedBtn').innerText = t.verifiedBtn;
+        
+        document.getElementById('regulatoryText').innerHTML = t.regulatoryText;
+        
+        document.querySelector('#profileModal h2').innerHTML = `<i class="fas fa-user-edit"></i> ${t.profileTitle}`;
+        document.getElementById('fullNameLabel').innerHTML = `<i class="fas fa-user"></i> ${t.fullNameLabel}`;
+        document.getElementById('emailLabelProfile').innerHTML = `<i class="fas fa-envelope"></i> ${t.emailLabelProfile}`;
+        document.getElementById('objectiveLabel').innerHTML = `<i class="fas fa-bullseye"></i> ${t.objectiveLabel}`;
+        document.getElementById('saveProfileText').innerHTML = `<i class="fas fa-save"></i> ${t.saveProfileText}`;
+        
         document.getElementById('currentLangText').innerText = currentLang.toUpperCase();
         
-        if (currentLang === 'ar') document.body.style.direction = 'rtl';
-        else document.body.style.direction = 'ltr';
+        if(currentLang === 'ar') {
+            document.body.classList.add('rtl');
+        } else {
+            document.body.classList.remove('rtl');
+        }
         
         document.querySelectorAll('.lang-option').forEach(btn => {
-            if (btn.dataset.lang === currentLang) btn.classList.add('active');
+            if(btn.dataset.lang === currentLang) btn.classList.add('active');
             else btn.classList.remove('active');
         });
     }
 
-    function setLanguage(lang) { currentLang = lang; localStorage.setItem('zentronix_lang', lang); updateLanguage(); }
+    function setLanguage(lang) { 
+        currentLang = lang; 
+        localStorage.setItem('zentronix_lang', lang); 
+        updateLanguage(); 
+    }
 
-    // Language selector events
-    document.getElementById('langTrigger').addEventListener('click', () => document.getElementById('langContainer').classList.toggle('active'));
-    document.querySelectorAll('.lang-option').forEach(btn => { btn.addEventListener('click', () => setLanguage(btn.dataset.lang)); });
-    document.addEventListener('click', (e) => { if (!e.target.closest('.lang-container')) document.getElementById('langContainer').classList.remove('active'); });
+    function initChart() {
+        const ctx = document.getElementById('stakingChart').getContext('2d');
+        stakingChart = new Chart(ctx, {
+            type: 'line',
+            data: { labels: ['Week 1','Week 2','Week 3','Week 4','Week 5','Week 6'], datasets: [
+                { label: 'BICOIN', data: [10.20, 10.35, 10.28, 10.42, 10.38, 10.42], borderColor: '#00f2ff', backgroundColor: 'rgba(0,242,255,0.05)', fill: true, tension: 0.4 },
+                { label: 'ETH', data: [3320, 3380, 3420, 3400, 3450, 3456], borderColor: '#bc13fe', backgroundColor: 'rgba(188,19,254,0.05)', fill: true, tension: 0.4 }
+            ] },
+            options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#e0e0e0' } } }, scales: { y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#a0a0b0' } }, x: { ticks: { color: '#a0a0b0' } } } }
+        });
+    }
 
-    // Crypto prices
     function updateCryptoPrices() {
-        document.getElementById('btcPrice') && (document.getElementById('btcPrice').innerHTML = `BTC/USD: $${(67234 + Math.random() * 1000 - 500).toFixed(2)}`);
-        document.getElementById('ethPrice') && (document.getElementById('ethPrice').innerHTML = `ETH/USD: $${(3456 + Math.random() * 50 - 25).toFixed(2)}`);
-        document.getElementById('brdPrice') && (document.getElementById('brdPrice').innerHTML = `BRD/USD: $10.00`);
-        document.getElementById('solPrice') && (document.getElementById('solPrice').innerHTML = `SOL/USD: $${(98.50 + Math.random() * 5 - 2.5).toFixed(2)}`);
-        document.getElementById('xrpPrice') && (document.getElementById('xrpPrice').innerHTML = `XRP/USD: $${(0.52 + Math.random() * 0.05 - 0.025).toFixed(3)}`);
-        document.getElementById('adaPrice') && (document.getElementById('adaPrice').innerHTML = `ADA/USD: $${(0.45 + Math.random() * 0.03 - 0.015).toFixed(3)}`);
+        document.getElementById('btcPrice') && (document.getElementById('btcPrice').innerHTML = `$${(67234 + Math.random() * 1000 - 500).toFixed(2)}`);
+        document.getElementById('ethPrice') && (document.getElementById('ethPrice').innerHTML = `$${(3456 + Math.random() * 50 - 25).toFixed(2)}`);
+        document.getElementById('brdPrice') && (document.getElementById('brdPrice').innerHTML = `$${(10 + Math.random() * 0.5 - 0.25).toFixed(2)}`);
+        document.getElementById('solPrice') && (document.getElementById('solPrice').innerHTML = `$${(98.50 + Math.random() * 5 - 2.5).toFixed(2)}`);
     }
     setInterval(updateCryptoPrices, 5000);
     updateCryptoPrices();
 
-    function updateBalanceDisplay() {
-        document.getElementById('usdBalance') && (document.getElementById('usdBalance').innerHTML = `$${balances.USD.toLocaleString()}`);
-        document.getElementById('eurBalance') && (document.getElementById('eurBalance').innerHTML = `€${balances.EUR.toLocaleString()}`);
-        document.getElementById('gbpBalance') && (document.getElementById('gbpBalance').innerHTML = `£${balances.GBP.toLocaleString()}`);
-        document.getElementById('cadBalance') && (document.getElementById('cadBalance').innerHTML = `C$${balances.CAD.toLocaleString()}`);
-        document.getElementById('brlBalance') && (document.getElementById('brlBalance').innerHTML = `R$${balances.BRL.toLocaleString()}`);
-        document.getElementById('aedBalance') && (document.getElementById('aedBalance').innerHTML = `د.إ${balances.AED.toLocaleString()}`);
+    function showSection(sectionId) {
+        document.querySelectorAll('.investment-section').forEach(s => s.style.display = 'none');
+        const targetSection = document.getElementById(`${sectionId}Section`);
+        if(targetSection) targetSection.style.display = 'block';
+        document.querySelectorAll('.menu-item[data-section]').forEach(m => m.classList.remove('active'));
+        document.querySelector(`.menu-item[data-section="${sectionId}"]`)?.classList.add('active');
     }
 
-    function addTransaction(type, amount, currency) {
-        const historyDiv = document.getElementById('transactionHistory');
-        const date = new Date().toLocaleString();
-        const sign = type === 'deposit' ? '+' : '-';
-        const tx = document.createElement('div'); tx.className = 'transaction-item';
-        tx.innerHTML = `<span>${date}</span><span style="color:${type === 'deposit' ? '#00ff88' : '#ff4466'}">${sign} ${amount.toLocaleString()} ${currency}</span><span>${type === 'deposit' ? 'Deposit' : 'Withdrawal'}</span>`;
-        historyDiv.insertBefore(tx, historyDiv.firstChild);
-        if (historyDiv.children.length > 10) historyDiv.removeChild(historyDiv.lastChild);
+    document.querySelectorAll('.menu-item[data-section]').forEach(btn => {
+        btn.addEventListener('click', () => showSection(btn.dataset.section));
+    });
+
+    function toggleGhostMode() {
+        ghostActive = !ghostActive;
+        const container = document.getElementById('dashboardContainer');
+        if(ghostActive) container.classList.add('ghost-mode');
+        else container.classList.remove('ghost-mode');
+        renderCurrencies();
+        updateTotalBalance();
     }
+    document.getElementById('ghostModeBtn')?.addEventListener('click', toggleGhostMode);
 
-    // Deposit/Withdraw
-    document.getElementById('depositBtn')?.addEventListener('click', () => {
-        let amount = parseFloat(document.getElementById('depositAmount').value);
-        const currency = document.getElementById('depositCurrency').value;
-        const msgDiv = document.getElementById('depositMsg');
-        if (isNaN(amount) || amount <= 0) { msgDiv.innerHTML = '❌ Enter valid amount'; msgDiv.style.color = '#ff4466'; setTimeout(() => msgDiv.innerHTML = '', 3000); return; }
-        balances[currency] += amount; updateBalanceDisplay();
-        let msg = translations[currentLang].depositSuccess.replace('{{amount}}', amount.toLocaleString()).replace('{{currency}}', currency);
-        msgDiv.innerHTML = msg; msgDiv.style.color = '#00ff88';
-        addTransaction('deposit', amount, currency);
-        document.getElementById('depositAmount').value = '';
-        setTimeout(() => msgDiv.innerHTML = '', 3000);
-    });
-
-    document.getElementById('withdrawBtn')?.addEventListener('click', () => {
-        let amount = parseFloat(document.getElementById('withdrawAmount').value);
-        const currency = document.getElementById('withdrawCurrency').value;
-        const dest = document.getElementById('destinationWallet').value;
-        const msgDiv = document.getElementById('withdrawMsg');
-        if (isNaN(amount) || amount <= 0) { msgDiv.innerHTML = '❌ Enter valid amount'; msgDiv.style.color = '#ff4466'; setTimeout(() => msgDiv.innerHTML = '', 3000); return; }
-        if (!dest) { msgDiv.innerHTML = '❌ Enter destination wallet'; msgDiv.style.color = '#ff4466'; setTimeout(() => msgDiv.innerHTML = '', 3000); return; }
-        if (amount > balances[currency]) { msgDiv.innerHTML = translations[currentLang].insufficientFunds.replace('{{currency}}', currency); msgDiv.style.color = '#ff4466'; setTimeout(() => msgDiv.innerHTML = '', 3000); return; }
-        balances[currency] -= amount; updateBalanceDisplay();
-        let msg = translations[currentLang].withdrawSuccess.replace('{{amount}}', amount.toLocaleString()).replace('{{currency}}', currency);
-        msgDiv.innerHTML = msg; msgDiv.style.color = '#00ff88';
-        addTransaction('withdraw', amount, currency);
-        document.getElementById('withdrawAmount').value = ''; document.getElementById('destinationWallet').value = '';
-        setTimeout(() => msgDiv.innerHTML = '', 3000);
-    });
-
-    // Document Submission
-    document.getElementById('documentsForm')?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('fullName').value;
-        const email = document.getElementById('emailDoc').value;
-        const passport = document.getElementById('passportNumber').value;
-        const file = document.getElementById('documentFile').files[0];
-        if (name && email && passport && file) {
-            document.getElementById('submitMessage').innerHTML = translations[currentLang].submitSuccess;
-            document.getElementById('submitMessage').style.color = '#00ff88';
-            document.getElementById('documentsForm').reset();
-            setTimeout(() => document.getElementById('submitMessage').innerHTML = '', 5000);
+    let stealthActive = false;
+    function toggleStealth() {
+        stealthActive = !stealthActive;
+        document.getElementById('stealthSwitch').classList.toggle('active', stealthActive);
+        if(stealthActive) {
+            document.querySelectorAll('.balance-amount').forEach(el => el.classList.add('stealth'));
         } else {
-            document.getElementById('submitMessage').innerHTML = '❌ Please fill all fields and select a file';
-            document.getElementById('submitMessage').style.color = '#ff4466';
-            setTimeout(() => document.getElementById('submitMessage').innerHTML = '', 3000);
+            document.querySelectorAll('.balance-amount').forEach(el => el.classList.remove('stealth'));
         }
+    }
+    document.getElementById('stealthToggle')?.addEventListener('click', toggleStealth);
+    document.getElementById('stealthSwitch')?.addEventListener('click', toggleStealth);
+
+    let simulatorVisible = false;
+    document.getElementById('simulatorBtn')?.addEventListener('click', () => {
+        const panel = document.getElementById('simulatorPanel');
+        simulatorVisible = !simulatorVisible;
+        panel.style.display = simulatorVisible ? 'block' : 'none';
+    });
+    document.getElementById('timeSlider')?.addEventListener('input', (e) => {
+        const years = e.target.value;
+        const fixedIncome = Math.pow(1.04, years) * 100 - 100;
+        const equities = Math.pow(1.09, years) * 100 - 100;
+        document.getElementById('simResult').innerHTML = `👉 Projection for ${years} years: Fixed Income: +${fixedIncome.toFixed(0)}% | Equities: +${equities.toFixed(0)}%`;
     });
 
-    // Login Modal Functions
-    function openLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
-    function closeLoginModal() { document.getElementById('loginModal').style.display = 'none'; }
+    document.getElementById('themesBtn')?.addEventListener('click', () => {
+        const theme = prompt('Choose Theme: Blue Purple | Tactical Military | Golden Offshore');
+        if(theme === 'Tactical Military') document.documentElement.style.setProperty('--bg-deep', '#0a1f0a');
+        else if(theme === 'Golden Offshore') document.documentElement.style.setProperty('--bg-deep', '#1a1a0a');
+        else document.documentElement.style.setProperty('--bg-deep', '#0a0b1e');
+    });
+
+    document.getElementById('auditBtn')?.addEventListener('click', () => {
+        alert('📋 Audit Log Export\n- Login: Today 09:32\n- Stake: 500 BICOIN\n- Ghost Mode Toggled\n- Security certificates verified');
+    });
+
+    // Profile Modal
+    const profileModal = document.getElementById('profileModal');
+    const openProfileBtn = document.getElementById('openProfileBtn');
+    const closeProfileBtn = document.getElementById('closeProfileModalBtn');
+    const saveProfileBtn = document.getElementById('saveProfileBtn');
+    const profileFullName = document.getElementById('profileFullName');
+    const profileEmail = document.getElementById('profileEmail');
+    const profileObjective = document.getElementById('profileObjective');
+
+    openProfileBtn?.addEventListener('click', () => {
+        profileFullName.value = userProfile.fullName;
+        profileEmail.value = userProfile.email;
+        profileObjective.value = userProfile.objective;
+        profileModal.classList.add('active');
+    });
+
+    closeProfileBtn?.addEventListener('click', () => {
+        profileModal.classList.remove('active');
+    });
+
+    saveProfileBtn?.addEventListener('click', () => {
+        userProfile.fullName = profileFullName.value;
+        userProfile.email = profileEmail.value;
+        userProfile.objective = profileObjective.value;
+        document.getElementById('welcomeUser').innerText = userProfile.fullName;
+        profileModal.classList.remove('active');
+        alert('✅ Profile updated successfully!');
+    });
+
+    // Submit Documents Modal
+    const submitModal = document.getElementById('submitModal');
+    const openSubmitBtn = document.getElementById('openSubmitModalBtn');
+    const closeSubmitBtn = document.getElementById('closeSubmitModalBtn');
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+    const submitDocsFinalBtn = document.getElementById('submitDocsFinalBtn');
+    const submitSuccessMsg = document.getElementById('submitSuccessMsg');
+
+    openSubmitBtn?.addEventListener('click', () => {
+        submitModal.classList.add('active');
+    });
+
+    closeSubmitBtn?.addEventListener('click', () => {
+        submitModal.classList.remove('active');
+        submitSuccessMsg.style.display = 'none';
+    });
+
+    uploadArea?.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    uploadArea?.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.style.borderColor = 'var(--neon-blue)';
+        uploadArea.style.background = 'rgba(0, 242, 255, 0.1)';
+    });
+
+    uploadArea?.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        uploadArea.style.borderColor = 'var(--neon-purple)';
+        uploadArea.style.background = 'transparent';
+    });
+
+    uploadArea?.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.style.borderColor = 'var(--neon-purple)';
+        uploadArea.style.background = 'transparent';
+        const files = Array.from(e.dataTransfer.files);
+        addFiles(files);
+    });
+
+    fileInput?.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        addFiles(files);
+    });
+
+    function addFiles(files) {
+        files.forEach(file => {
+            if (file.type === 'application/pdf' || file.type.startsWith('image/')) {
+                if (file.size <= 10 * 1024 * 1024) {
+                    uploadedFiles.push(file);
+                    displayFileList();
+                } else {
+                    alert(`Arquivo ${file.name} excede 10MB`);
+                }
+            } else {
+                alert(`Formato não suportado: ${file.name}. Use PDF, JPG ou PNG.`);
+            }
+        });
+        fileInput.value = '';
+    }
+
+    function displayFileList() {
+        fileList.innerHTML = '';
+        uploadedFiles.forEach((file, index) => {
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'document-item';
+            fileDiv.innerHTML = `
+                <div><i class="fas fa-file-pdf"></i> ${file.name} (${(file.size / 1024).toFixed(2)} KB)</div>
+                <button class="remove-doc" data-index="${index}">✕</button>
+            `;
+            fileList.appendChild(fileDiv);
+        });
+        document.querySelectorAll('.remove-doc').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = parseInt(btn.dataset.index);
+                uploadedFiles.splice(idx, 1);
+                displayFileList();
+            });
+        });
+    }
+
+    submitDocsFinalBtn?.addEventListener('click', () => {
+        const fullName = document.getElementById('fullNameDoc').value;
+        const email = document.getElementById('emailDocInput').value;
+        const phone = document.getElementById('phoneDoc').value;
+        
+        if (!fullName || !email || !phone) {
+            alert('Please fill all required fields');
+            return;
+        }
+        
+        if (uploadedFiles.length === 0) {
+            alert('Please upload at least one document');
+            return;
+        }
+        
+        submitSuccessMsg.style.display = 'block';
+        
+        setTimeout(() => {
+            submitModal.classList.remove('active');
+            submitSuccessMsg.style.display = 'none';
+            document.getElementById('fullNameDoc').value = '';
+            document.getElementById('emailDocInput').value = '';
+            document.getElementById('phoneDoc').value = '';
+            document.getElementById('docNotes').value = '';
+            uploadedFiles = [];
+            displayFileList();
+            alert('✅ ' + (currentLang === 'en' ? 'Documents submitted successfully! Our team will review within 24 hours.' : currentLang === 'pt' ? 'Documentos enviados com sucesso! Nossa equipe analisará em até 24 horas.' : currentLang === 'es' ? '¡Documentos enviados con éxito! Nuestro equipo revisará en 24 horas.' : 'تم إرسال المستندات بنجاح! سيقوم فريقنا بالمراجعة خلال 24 ساعة.'));
+        }, 2000);
+    });
+
+    // Security Seals Modal
+    const securityModal = document.getElementById('securityModal');
+    const modalSealTitle = document.getElementById('modalSealTitle');
+    const modalSealDesc = document.getElementById('modalSealDesc');
+    const sealInfo = {
+        ev: { name: 'EV SSL Certificate', desc: 'Extended Validation SSL - 256-bit encryption protecting all data transfers.' },
+        pci: { name: 'PCI DSS Level 1', desc: 'Payment Card Industry Data Security Standard.' },
+        soc2: { name: 'SOC 2 Type II', desc: 'System and Organization Controls - Audit certified.' },
+        mcafee: { name: 'McAfee Secure', desc: 'Daily vulnerability scans and malware protection.' },
+        iso: { name: 'ISO/IEC 27001', desc: 'International standard for information security management.' },
+        aes: { name: 'AES-256 Military Grade', desc: 'Military-grade encryption standard.' },
+        certik: { name: 'CertiK Audit', desc: 'Blockchain security audit - Smart contract verified.' },
+        kyc: { name: 'KYC/AML Verified', desc: 'Know Your Customer & Anti-Money Laundering compliant.' },
+        license: { name: 'Offshore Banking License', desc: 'Licensed offshore bank - Cayman Islands / Switzerland.' }
+    };
+    
+    document.querySelectorAll('.seal-item, .seal-cert').forEach(seal => {
+        seal.addEventListener('click', () => {
+            const type = seal.dataset.seal;
+            if(sealInfo[type]) {
+                modalSealTitle.innerText = sealInfo[type].name;
+                modalSealDesc.innerText = sealInfo[type].desc;
+                securityModal.style.display = 'flex';
+            }
+        });
+    });
+    document.querySelector('.close-security')?.addEventListener('click', () => securityModal.style.display = 'none');
+
+    // Order Modal
+    const orderModal = document.getElementById('orderModal');
+    let currentAsset = '';
+    document.querySelectorAll('.buy-btn, .sell-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            currentAsset = btn.dataset.asset || btn.closest('.asset-card')?.querySelector('.asset-ticker')?.innerText || 'Asset';
+            document.getElementById('orderInfo').innerHTML = `<p>${btn.innerText} order for ${currentAsset}</p><p>Market depth: Bid $${(Math.random() * 100 + 50).toFixed(2)} / Ask $${(Math.random() * 100 + 55).toFixed(2)}</p><p>Liquidity: High</p>`;
+            orderModal.style.display = 'flex';
+            e.stopPropagation();
+        });
+    });
+    document.querySelector('.close-order')?.addEventListener('click', () => orderModal.style.display = 'none');
+    document.getElementById('executeOrderBtn')?.addEventListener('click', () => {
+        alert(`✅ Order executed for ${currentAsset}!\n📋 Transaction ID: ${Math.random().toString(36).substring(2, 10).toUpperCase()}\n⏱️ Settlement: T+2`);
+        orderModal.style.display = 'none';
+    });
+
+    // Login Functions
+    const loginModal = document.getElementById('loginModal');
+    
+    function openLoginModal() { 
+        loginModal.classList.add('active'); 
+    }
+    function closeLoginModal() { 
+        loginModal.classList.remove('active'); 
+        document.getElementById('loginErrorMsg').style.display = 'none';
+    }
     function login() {
         const id = document.getElementById('loginId').value;
         const pass = document.getElementById('loginPassword').value;
-        if (id === 'admin' && pass === 'zentronix') {
-            isLoggedIn = true; localStorage.setItem('zentronix_logged', 'true');
+        if(id === 'admin' && pass === 'zentronix') {
+            isLoggedIn = true; 
+            localStorage.setItem('zentronix_logged', 'true');
             closeLoginModal();
             document.getElementById('dashboardContainer').style.display = 'block';
             document.getElementById('openLoginBtn').style.display = 'none';
             document.getElementById('logoutMainBtn').style.display = 'flex';
-            updateBalanceDisplay();
-            if (translations[currentLang]) document.getElementById('dashboardTitle').innerText = translations[currentLang].dashboardTitle;
-        } else { document.getElementById('loginErrorMsg').innerHTML = translations[currentLang].loginError; }
+            renderCurrencies();
+            updateTotalBalance();
+            if(!stakingChart) initChart();
+            document.getElementById('loginId').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginErrorMsg').style.display = 'none';
+        } else { 
+            const errorMsg = document.getElementById('loginErrorMsg');
+            errorMsg.innerHTML = translations[currentLang].loginError;
+            errorMsg.style.display = 'block';
+        }
     }
-    function logout() { isLoggedIn = false; localStorage.removeItem('zentronix_logged'); document.getElementById('dashboardContainer').style.display = 'none'; document.getElementById('openLoginBtn').style.display = 'flex'; document.getElementById('logoutMainBtn').style.display = 'none'; }
+    function logout() { 
+        isLoggedIn = false; 
+        localStorage.removeItem('zentronix_logged'); 
+        document.getElementById('dashboardContainer').style.display = 'none'; 
+        document.getElementById('openLoginBtn').style.display = 'flex';
+        document.getElementById('logoutMainBtn').style.display = 'none';
+    }
 
-    if (localStorage.getItem('zentronix_logged') === 'true') { isLoggedIn = true; document.getElementById('dashboardContainer').style.display = 'block'; document.getElementById('openLoginBtn').style.display = 'none'; document.getElementById('logoutMainBtn').style.display = 'flex'; updateBalanceDisplay(); }
+    if(localStorage.getItem('zentronix_logged') === 'true') {
+        isLoggedIn = true;
+        document.getElementById('dashboardContainer').style.display = 'block';
+        document.getElementById('openLoginBtn').style.display = 'none';
+        document.getElementById('logoutMainBtn').style.display = 'flex';
+        renderCurrencies();
+        updateTotalBalance();
+        initChart();
+    }
 
-    document.getElementById('openLoginBtn').addEventListener('click', openLoginModal);
-    document.getElementById('logoutMainBtn').addEventListener('click', logout);
-    document.getElementById('loginSubmitBtn').addEventListener('click', login);
-    document.getElementById('closeModalBtn').addEventListener('click', closeLoginModal);
-    window.addEventListener('click', (e) => { if (e.target === document.getElementById('loginModal')) closeLoginModal(); });
+    document.getElementById('openLoginBtn')?.addEventListener('click', openLoginModal);
+    document.getElementById('logoutMainBtn')?.addEventListener('click', logout);
+    document.getElementById('loginSubmitBtn')?.addEventListener('click', login);
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeLoginModal);
+    
+    document.getElementById('loginPassword')?.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') login();
+    });
+    document.getElementById('loginId')?.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') login();
+    });
+
+    document.getElementById('langTrigger')?.addEventListener('click', () => document.getElementById('langContainer').classList.toggle('active'));
+    document.querySelectorAll('.lang-option').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
 
     updateLanguage();
-    updateBalanceDisplay();
 </script>
 </body>
 </html>
